@@ -7,26 +7,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] float attackRange = 5f;
 
+    public GameObject Energy;
     public Joystick joystick;
     public List<Transform> enemies;
     private PlayerShoot playerShoot;
     public CharacterController characterController;
-
     public Transform target;
 
-    Rigidbody rb;
+    private float angle;
 
-    float xMin;
-    float xMax;
-
-    float yMax;
-    float yMin;
 
     void Start()
     {
         enemies = new List<Transform>();
         playerShoot = GetComponent<PlayerShoot>();
-        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -52,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
 
         MoveWithController();
         MoveWithKeyboard();
+
+        FindEnergyPosition();
     }
 
     private void MoveWithKeyboard()
@@ -123,6 +119,20 @@ public class PlayerMovement : MonoBehaviour
         }
         target = bestTarget;
         return bestTarget;
+    }
+
+    private void FindEnergyPosition()
+    {
+        float yValue = Energy.transform.position.z - transform.position.z;
+        float xValue = Energy.transform.position.x - transform.position.x;
+
+        angle = Mathf.Atan2(yValue, xValue) * 180 / Mathf.PI;
+        //Debug.Log(angle);
+    }
+
+    public float GetTheAngleBetweenPlayerAndEnergy()
+    {
+        return angle;
     }
 
 }
