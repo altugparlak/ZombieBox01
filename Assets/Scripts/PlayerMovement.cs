@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] float attackRange = 5f;
 
+    public Joystick joystick;
     public List<Transform> enemies;
     private PlayerShoot playerShoot;
     public CharacterController characterController;
@@ -50,12 +51,26 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
 
         MoveWithController();
+        MoveWithKeyboard();
+    }
+
+    private void MoveWithKeyboard()
+    {
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
+        float moveVertical = Input.GetAxisRaw("Vertical");
+
+        Vector3 direction = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
+
+        if (direction.magnitude >= 0.1f)
+        {
+            characterController.Move(direction * speed * Time.deltaTime);
+        }
     }
 
     private void MoveWithController()
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
+        float moveHorizontal = joystick.Horizontal;
+        float moveVertical = joystick.Vertical;
         Vector3 direction = new Vector3(moveHorizontal,0f,moveVertical).normalized;
 
         if (direction.magnitude >= 0.1f)
