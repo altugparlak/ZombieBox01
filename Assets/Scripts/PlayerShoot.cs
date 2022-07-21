@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-
+    [Header("Projectile")]
     public GameObject projectile;
     public GameObject parent;
 

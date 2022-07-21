@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Projectile")]
+    public GameObject SpeedBoostEffect;
+    public GameObject parent;
+    private GameObject SpeedBoostObject;
+    private bool speedBoostActivated = false;
+
+    [Header("Player")]
     [SerializeField] float speed = 1f;
     [SerializeField] float attackRange = 5f;
 
@@ -15,12 +22,14 @@ public class PlayerMovement : MonoBehaviour
     public Transform target;
 
     private float angle;
+    private float speedvalueHolder;
 
 
     void Start()
     {
         enemies = new List<Transform>();
         playerShoot = GetComponent<PlayerShoot>();
+        speedvalueHolder = speed;
     }
 
     void Update()
@@ -48,6 +57,11 @@ public class PlayerMovement : MonoBehaviour
         MoveWithKeyboard();
 
         FindEnergyPosition();
+
+        if (speedBoostActivated)
+        {
+            SpeedBoostObject.transform.position = transform.position;
+        }
     }
 
     private void MoveWithKeyboard()
@@ -134,5 +148,27 @@ public class PlayerMovement : MonoBehaviour
     {
         return angle;
     }
+
+    public void ActivateSpeedBoost()
+    {
+        StartCoroutine(SpeedBoost(3f));
+    }
+
+    private IEnumerator SpeedBoost(float time)
+    {
+        speedBoostActivated = true;
+        speed = speedvalueHolder * 2;
+        
+        GameObject shoot = Instantiate(SpeedBoostEffect, transform.position, Quaternion.identity);
+        SpeedBoostObject = shoot;
+        shoot.transform.SetParent(parent.transform);
+        Destroy(shoot, time + 0.05f);
+        
+        yield return new WaitForSeconds(time);
+        speedBoostActivated = false;
+        speed = speedvalueHolder;
+    }
+
+   
 
 }

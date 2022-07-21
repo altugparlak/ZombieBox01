@@ -38,6 +38,8 @@ public class ProjectileMover : MonoBehaviour
     {
 		if (speed != 0)
         {
+            if (rb == null)
+                return;
             rb.velocity = transform.forward * speed;
             //transform.position += transform.forward * (speed * Time.deltaTime);         
         }
