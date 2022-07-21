@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         MoveWithController();
         MoveWithKeyboard();
 
-        FindEnergyPosition();
+        //FindEnergyPosition();
     }
 
     private void MoveWithKeyboard()
@@ -121,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
         return bestTarget;
     }
 
+    /*
     private void FindEnergyPosition()
     {
         float yValue = Energy.transform.position.z - transform.position.z;
@@ -129,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
         angle = Mathf.Atan2(yValue, xValue) * 180 / Mathf.PI;
         //Debug.Log(angle);
     }
+    */
 
     public float GetTheAngleBetweenPlayerAndEnergy()
     {
