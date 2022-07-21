@@ -36,13 +36,17 @@ public class Arrow : MonoBehaviour
 
         rectTransform.anchoredPosition = new Vector2(newXPos, newYPos);
 
-        if (theAngle < 0)
+        if (theAngle > 0)
         {
             if (theAngle < 180 && theAngle >= 135)
             {
-                rectTransform.anchoredPosition = new Vector2(-600, newYPos);
+                rectTransform.anchoredPosition = new Vector2(-600, theAngle);
             }
-            else if (theAngle < 135 && theAngle >= 45)
+            else if (theAngle < 135 && theAngle >= 90)
+            {
+                rectTransform.anchoredPosition = new Vector2(newXPos, 300);
+            }
+            else if (theAngle < 90 && theAngle >= 45)
             {
                 rectTransform.anchoredPosition = new Vector2(newXPos, 300);
             }
@@ -57,7 +61,11 @@ public class Arrow : MonoBehaviour
             {
                 rectTransform.anchoredPosition = new Vector2(-600, newYPos);
             }
-            else if (theAngle > -135 && theAngle <= -45)
+            else if (theAngle > -135 && theAngle <= -90)
+            {
+                rectTransform.anchoredPosition = new Vector2(newXPos, -300);
+            }
+            else if (theAngle > -90 && theAngle <= -45)
             {
                 rectTransform.anchoredPosition = new Vector2(newXPos, -300);
             }
