@@ -9,6 +9,8 @@ public class Arrow : MonoBehaviour
     RectTransform rectTransform;
 
     PlayerMovement playerMovement;
+    Camera gameCamera;
+
 
     float xMin = -600;
     float xMax = 600;
@@ -21,57 +23,47 @@ public class Arrow : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         playerMovement = FindObjectOfType<PlayerMovement>();
+        gameCamera = Camera.main;
         rectTransform.anchoredPosition = new Vector3(-600, 300, 0);
+    }
+
+    private void Update()
+    {
+        Move();
     }
 
     private void Move()
     {
         float theAngle = playerMovement.GetTheAngleBetweenPlayerAndEnergy();
 
-        var deltaX =  5* Time.deltaTime * moveSpeed;
-        var deltaY =  5* Time.deltaTime * moveSpeed;
+        // theAnge 180-----0
+        //        -180-----0
 
-        var newXPos = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
-        var newYPos = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
+        float xValue;
+        float yValue;
 
-        rectTransform.anchoredPosition = new Vector2(newXPos, newYPos);
-
-        if (theAngle > 0)
+        float controlledXvalue;
+        float controlledYvalue;
+        if (theAngle >= 0)
         {
-            if (theAngle < 180 && theAngle >= 135)
+            if (theAngle < 25)
             {
-                rectTransform.anchoredPosition = new Vector2(-600, theAngle);
+                yValue = theAngle / 25;
+                controlledYvalue = Mathf.Clamp(yValue, 0.5f, 0.9f);
+                transform.position = gameCamera.ViewportToScreenPoint(new Vector3(0.1f, controlledYvalue, 0));
             }
-            else if (theAngle < 135 && theAngle >= 90)
+            else if (theAngle >= 25 && theAngle <= 155)
             {
-                rectTransform.anchoredPosition = new Vector2(newXPos, 300);
+                xValue = theAngle / 180;
+                controlledXvalue = Mathf.Clamp(xValue, 0.1f, 0.9f);
+                transform.position = gameCamera.ViewportToScreenPoint(new Vector3(controlledXvalue, 0.9f, 0));
             }
-            else if (theAngle < 90 && theAngle >= 45)
+            else if (theAngle > 155)
             {
-                rectTransform.anchoredPosition = new Vector2(newXPos, 300);
-            }
-            else if (theAngle < 45 && theAngle > 0)
-            {
-                rectTransform.anchoredPosition = new Vector2(600, newYPos);
-            }
-        }
-        else
-        {
-            if (theAngle > -180 && theAngle <= -135)
-            {
-                rectTransform.anchoredPosition = new Vector2(-600, newYPos);
-            }
-            else if (theAngle > -135 && theAngle <= -90)
-            {
-                rectTransform.anchoredPosition = new Vector2(newXPos, -300);
-            }
-            else if (theAngle > -90 && theAngle <= -45)
-            {
-                rectTransform.anchoredPosition = new Vector2(newXPos, -300);
-            }
-            else if (theAngle > -45 && theAngle < 0)
-            {
-                rectTransform.anchoredPosition = new Vector2(600, newYPos);
+                yValue = 156 / theAngle; // Şuanda burası sıkıntılı
+                Debug.Log(yValue);
+                controlledYvalue = Mathf.Clamp(yValue, 0.5f, 0.9f);
+                transform.position = gameCamera.ViewportToScreenPoint(new Vector3(0.9f, controlledYvalue, 0));
             }
         }
 

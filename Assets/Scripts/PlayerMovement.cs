@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
         float yValue = Energy.transform.position.z - transform.position.z;
         float xValue = Energy.transform.position.x - transform.position.x;
 
-        angle = Mathf.Atan2(yValue, xValue) * 180 / Mathf.PI;
+        angle = Mathf.Atan2(yValue, -xValue) * 180 / Mathf.PI;
         //Debug.Log(angle);
     }
 
