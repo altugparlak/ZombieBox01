@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CodeMonkey.Utils;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerShoot playerShoot;
     public CharacterController characterController;
     public Transform target;
+
+    Transform energyPos;
 
     private float angle;
     private float speedvalueHolder;
@@ -135,17 +138,34 @@ public class PlayerMovement : MonoBehaviour
         return bestTarget;
     }
 
-    private void FindEnergyPosition()
+    private Transform FindEnergyPosition()
     {
         float yValue = Energy.transform.position.z - transform.position.z;
         float xValue = Energy.transform.position.x - transform.position.x;
 
+        
+        energyPos.position = new Vector3(xValue, yValue, 0);
+
         angle = Mathf.Atan2(yValue, -xValue) * 180 / Mathf.PI;
         //Debug.Log(angle);
+
+
+        return energyPos;
+
+        
     }
 
     public float GetTheAngleBetweenPlayerAndEnergy()
     {
+        Transform energyPos = FindEnergyPosition();
+
+        Vector3 dir = energyPos.position - this.gameObject.transform.position;
+
+        angle = UtilsClass.GetAngleFromVectorFloat(dir);
+
+
+
+
         return angle;
     }
 
