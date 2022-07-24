@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,16 +16,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] float attackRange = 5f;
 
-    public GameObject Energy;
+
+    [Header("Others")]
+    [SerializeField] private GameObject enemyIndicator;
+
+    public GameObject energy;
     public Joystick joystick;
     public List<Transform> enemies;
     private PlayerShoot playerShoot;
     public CharacterController characterController;
     public Transform target;
 
-    Transform energyPos;
-
-    private float angle;
+    private float angleHolder;
     private float speedvalueHolder;
 
 
@@ -58,16 +61,12 @@ public class PlayerMovement : MonoBehaviour
 
         MoveWithController();
         MoveWithKeyboard();
-
-        //FindEnergyPosition();
-
+        IsVisibleOnScreen(energy);
         if (speedBoostActivated)
         {
             SpeedBoostObject.transform.position = transform.position;
         }
 
-        angle = GetAngle(Energy);
-        Debug.Log(angle);
     }
 
     private void MoveWithKeyboard()
@@ -141,36 +140,34 @@ public class PlayerMovement : MonoBehaviour
         return bestTarget;
     }
 
-    private Transform FindEnergyPosition()
-    {
-        float yValue = Energy.transform.position.z - transform.position.z;
-        float xValue = Energy.transform.position.x - transform.position.x;
+    //private Vector3 FindEnergyPosition()
+    //{
+    //    float yValue = energy.transform.position.z - transform.position.z;
+    //    float xValue = energy.transform.position.x - transform.position.x;
+
+    //    Vector3 energyPosition = new Vector3(xValue, yValue, 0);
+    //    angle = Mathf.Atan2(yValue, -xValue) * 180 / Mathf.PI;
+    //    //Debug.Log(angle);
+
+
+    //    return energyPosition;
 
         
-        energyPos.position = new Vector3(xValue, yValue, 0);
+    //}
 
-        angle = Mathf.Atan2(yValue, -xValue) * 180 / Mathf.PI;
-        //Debug.Log(angle);
+    //public float GetTheAngleBetweenPlayerAndEnergy()
+    //{
+    //    Vector3 energyPos = FindEnergyPosition();
 
+    //    Vector3 dir = energyPos - this.gameObject.transform.position;
 
-        return energyPos;
-
-        
-    }
-
-    public float GetTheAngleBetweenPlayerAndEnergy()
-    {
-        Transform energyPos = FindEnergyPosition();
-
-        Vector3 dir = energyPos.position - this.gameObject.transform.position;
-
-        angle = UtilsClass.GetAngleFromVectorFloat(dir);
+    //    angle = UtilsClass.GetAngleFromVectorFloat(dir);
 
 
 
 
-        return angle;
-    }
+    //    return angle;
+    //}
 
     public void ActivateSpeedBoost()
     {
@@ -193,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private float GetAngle(GameObject target)
+    private float CalculateAngle(GameObject target)
     {
         float angle;
         float xDiff = target.transform.position.x - transform.position.x;
@@ -227,7 +224,32 @@ public class PlayerMovement : MonoBehaviour
         // now we have our correct relative angle to the target between -180 and 180
         // Lets clamp it between -135 and 135
         Mathf.Clamp(angle, -135f, 135f);
+        angleHolder = angle;
+        //Debug.Log(angle);
         return angle;
+    }
+
+    public float GetAngle()
+    {
+        return angleHolder;
+    }
+
+    private void IsVisibleOnScreen(GameObject target)
+    {
+        Camera mainCam = Camera.main;
+        Vector3 targetScreenPoint = mainCam.WorldToScreenPoint(target.GetComponent<Renderer>().bounds.center);
+
+        if ((targetScreenPoint.x < 0) || (targetScreenPoint.x > Screen.width) ||
+                (targetScreenPoint.y < 0) || (targetScreenPoint.y > Screen.height))
+        {
+            enemyIndicator.SetActive(true);
+            CalculateAngle(energy);
+        }
+        else
+        {
+            enemyIndicator.SetActive(false);
+        }
+
     }
 
 

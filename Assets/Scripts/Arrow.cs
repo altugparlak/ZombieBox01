@@ -9,76 +9,68 @@ public class Arrow : MonoBehaviour
     RectTransform rectTransform;
 
     PlayerMovement playerMovement;
-    Camera gameCamera;
-
-
-    float xMin = -600;
-    float xMax = 600;
-
-    float yMax = 300;
-    float yMin = -300;
 
 
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         playerMovement = FindObjectOfType<PlayerMovement>();
-        gameCamera = Camera.main;
         rectTransform.anchoredPosition = new Vector3(-600, 300, 0);
 
     }
 
     private void Update()
     {
-        float theAngle = playerMovement.GetTheAngleBetweenPlayerAndEnergy();
-        //Move();
+        float theAngle = playerMovement.GetAngle();
         PlaceSprite(theAngle);
     }
 
-    private void Move()
-    {
-        float theAngle = playerMovement.GetTheAngleBetweenPlayerAndEnergy();
+    //private void Move()
+    //{
+    //    float theAngle = playerMovement.GetTheAngleBetweenPlayerAndEnergy();
 
-        // theAnge 180-----0
-        //        -180-----0
+    //    // theAnge 180-----0
+    //    //        -180-----0
 
-        float xValue;
-        float yValue;
+    //    float xValue;
+    //    float yValue;
 
-        float controlledXvalue;
-        float controlledYvalue;
-        if (theAngle >= 0)
-        {
-            if (theAngle < 25)
-            {
-                yValue = theAngle / 25;
-                controlledYvalue = Mathf.Clamp(yValue, 0.5f, 0.9f);
-                transform.position = gameCamera.ViewportToScreenPoint(new Vector3(0.1f, controlledYvalue, 0));
-            }
-            else if (theAngle >= 25 && theAngle <= 155)
-            {
-                xValue = theAngle / 180;
-                controlledXvalue = Mathf.Clamp(xValue, 0.1f, 0.9f);
-                transform.position = gameCamera.ViewportToScreenPoint(new Vector3(controlledXvalue, 0.9f, 0));
-            }
-            else if (theAngle > 155)
-            {
-                yValue = 155.1f / theAngle; // Şuanda burası sıkıntılı
-                Debug.Log(yValue);
-                controlledYvalue = Mathf.Clamp(yValue, 0.5f, 0.9f);
-                transform.position = gameCamera.ViewportToScreenPoint(new Vector3(0.9f, controlledYvalue, 0));
-            }
-        }
-        else
-        {
-            if (theAngle < -155)
-            {
-                yValue = -155 / theAngle;
-                controlledYvalue = Mathf.Clamp(yValue, 0.1f, 0.5f);
-                transform.position = gameCamera.ViewportToScreenPoint(new Vector3(0.9f, controlledYvalue, 0));
-            }
-        }
-    }
+    //    float controlledXvalue;
+    //    float controlledYvalue;
+    //    if (theAngle >= 0)
+    //    {
+    //        if (theAngle < 25)
+    //        {
+    //            yValue = theAngle / 25;
+    //            controlledYvalue = Mathf.Clamp(yValue, 0.5f, 0.9f);
+    //            transform.position = gameCamera.ViewportToScreenPoint(new Vector3(0.1f, controlledYvalue, 0));
+    //        }
+    //        else if (theAngle >= 25 && theAngle <= 155)
+    //        {
+    //            xValue = theAngle / 180;
+    //            controlledXvalue = Mathf.Clamp(xValue, 0.1f, 0.9f);
+    //            transform.position = gameCamera.ViewportToScreenPoint(new Vector3(controlledXvalue, 0.9f, 0));
+    //        }
+    //        else if (theAngle > 155)
+    //        {
+    //            yValue = 155.1f / theAngle; // Şuanda burası sıkıntılı
+    //            Debug.Log(yValue);
+    //            controlledYvalue = Mathf.Clamp(yValue, 0.5f, 0.9f);
+    //            transform.position = gameCamera.ViewportToScreenPoint(new Vector3(0.9f, controlledYvalue, 0));
+    //        }
+    //    }
+    //    else
+    //    {
+    //        if (theAngle < -155)
+    //        {
+    //            yValue = -155 / theAngle;
+    //            controlledYvalue = Mathf.Clamp(yValue, 0.1f, 0.5f);
+    //            transform.position = gameCamera.ViewportToScreenPoint(new Vector3(0.9f, controlledYvalue, 0));
+    //        }
+    //    }
+    //}
+
+
     //hyi birleştir
     //h ttps://forum.unity.com/threads/3d-game-offscreen-target-indicator.431342/
     private void PlaceSprite(float angle)
@@ -96,7 +88,7 @@ public class Arrow : MonoBehaviour
         float yPos = 0f;
 
         // Left side of screen;
-        if (angle < -45)
+        if (angle < -45 && angle >= -135)
         {
             xPos = -halfScreenWidth + halfImageWidth;
             // Ypos can go between +ScreenHeight/2  down to -ScreenHeight/2
@@ -109,19 +101,19 @@ public class Arrow : MonoBehaviour
             // in the middle we need to do nothing. so we lerp on the angle again
             float yImageOffset = Mathf.Lerp(-halfImageHeight, halfImageHeight, normalizedAngle);
             yPos += yImageOffset;
-
         }
         // top of screen
-        else if (angle < 45)
+        else if (angle < 45 && angle >= -45)
         {
             yPos = halfScreenHeight - halfImageHeight;
             float normalizedAngle = (angle + 45f) / 90f;
             xPos = Mathf.Lerp(-halfScreenWidth, halfScreenWidth, normalizedAngle);
             float xImageOffset = Mathf.Lerp(halfImageWidth, -halfImageWidth, normalizedAngle);
             xPos += xImageOffset;
+            
         }
         // right side of screen
-        else
+        else if(angle > 45 && angle <= 135)
         {
             xPos = halfScreenWidth - halfImageWidth;
             float normalizedAngle = (angle - 45) / 90f;
@@ -129,10 +121,25 @@ public class Arrow : MonoBehaviour
             float yImageOffset = Mathf.Lerp(-halfImageHeight, halfImageHeight, normalizedAngle);
             yPos += yImageOffset;
         }
-
+        else if(angle < -135)
+        {
+            yPos = halfImageHeight - halfScreenHeight;
+            float normalizedAngle = (angle + 135) / -90f;
+            xPos = Mathf.Lerp(-halfScreenWidth, halfScreenWidth, normalizedAngle);
+            float xImageOffset = Mathf.Lerp(halfImageWidth, -halfImageWidth, normalizedAngle);
+            xPos += xImageOffset;
+        }
+        else if (angle > 135)
+        {
+            yPos = halfImageHeight - halfScreenHeight;
+            float normalizedAngle = 45f / (angle - 90);
+            xPos = Mathf.Lerp(-halfScreenWidth, halfScreenWidth, normalizedAngle);
+            float xImageOffset = Mathf.Lerp(halfImageWidth, -halfImageWidth, normalizedAngle);
+            xPos += xImageOffset;
+        }
         arrowRect.anchoredPosition = new Vector3(xPos, yPos, 0);
         // UI rotation is backwards from our system.  Positive angles go counterclockwise
-        arrowRect.Rotate(Vector3.forward, -angle);
+        //arrowRect.Rotate(Vector3.forward, -angle);
     }
 
 }

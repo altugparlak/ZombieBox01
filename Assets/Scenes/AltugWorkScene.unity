@@ -17383,7 +17383,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1319069681
 MonoBehaviour:
@@ -17398,14 +17398,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 2181bd4325efc432bb40c3383bff9b42, type: 3}
+  m_Texture: {fileID: 2800000, guid: 010a6e5305fa7004f89c5d317b7b47d4, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -27252,7 +27252,7 @@ SphereCollider:
   m_GameObject: {fileID: 2014109517}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -29609,6 +29609,11 @@ PrefabInstance:
       objectReference: {fileID: 2014109517}
     - target: {fileID: 1666672424894188243, guid: 4462a9ecfb59b418a9a99957ad88c3ae,
         type: 3}
+      propertyPath: energy
+      value: 
+      objectReference: {fileID: 2014109517}
+    - target: {fileID: 1666672424894188243, guid: 4462a9ecfb59b418a9a99957ad88c3ae,
+        type: 3}
       propertyPath: parent
       value: 
       objectReference: {fileID: 1822448302}
@@ -29617,6 +29622,11 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 2119704297}
+    - target: {fileID: 1666672424894188243, guid: 4462a9ecfb59b418a9a99957ad88c3ae,
+        type: 3}
+      propertyPath: enemyIndicator
+      value: 
+      objectReference: {fileID: 1319069679}
     - target: {fileID: 1666672424894188243, guid: 4462a9ecfb59b418a9a99957ad88c3ae,
         type: 3}
       propertyPath: SpeedBoostEffect
