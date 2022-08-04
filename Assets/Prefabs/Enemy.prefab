@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5721185087322736376}
   - component: {fileID: 988983619541794208}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6906212935994044475}
   - component: {fileID: 6906212935994044478}
   - component: {fileID: 6906212935994044477}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,9 +181,9 @@ GameObject:
   - component: {fileID: 6906212936819177549}
   - component: {fileID: 6906212936819177537}
   - component: {fileID: 6906212936819177538}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
