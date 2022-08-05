@@ -31136,6 +31136,11 @@ PrefabInstance:
       propertyPath: waveAmount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2207907831722942954, guid: 5fac83bcb5ba446e1820c1763e302784,
+        type: 3}
+      propertyPath: waveAmountIncreament
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fac83bcb5ba446e1820c1763e302784, type: 3}
 --- !u!1001 &4202536426043262323

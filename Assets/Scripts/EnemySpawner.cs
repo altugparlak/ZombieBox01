@@ -19,8 +19,7 @@ public class EnemySpawner : MonoBehaviour
     {
         gameSession = FindObjectOfType<GameSession>();
         numberOfEnemiesForTheWave = gameSession.waveAmount;
-
-        SpawningProgress();
+        Invoke("SpawningProgress", 2f);
     }
 
     private void Update()
@@ -81,7 +80,13 @@ public class EnemySpawner : MonoBehaviour
     {
         numberOfEnemiesForTheWave = gameSession.waveAmount;
         Debug.Log("Wave Amount: " + numberOfEnemiesForTheWave);
+        StartTheNextWave();
+
+    }
+
+    public void StartTheNextWave()
+    {
         canSpawn = true;
-        Invoke("SpawningProgress", 5f);
+        Invoke("SpawningProgress", 8f);
     }
 }

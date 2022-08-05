@@ -47,8 +47,11 @@ public class GameSession : MonoBehaviour
 
     public void SetUpTheNextWave()
     {
+        waveIndex++;
+        waveText.text = $"Wave {waveIndex}";
         waveAmount += waveAmountIncreament;
         enemySpawner.SetTheNumberOfEnemiesForTheWave();
+        Invoke("SplashWaveImageShowUp", 2f);
     }
 
 
