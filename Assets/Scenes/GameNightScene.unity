@@ -1866,6 +1866,7 @@ GameObject:
   - component: {fileID: 140490263}
   - component: {fileID: 140490265}
   - component: {fileID: 140490264}
+  - component: {fileID: 140490266}
   m_Layer: 5
   m_Name: SplashWaveImage
   m_TagString: Untagged
@@ -1932,6 +1933,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140490262}
   m_CullTransparentMesh: 1
+--- !u!95 &140490266
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140490262}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 275ea211cc65b4dbab99b8f7cf45df5e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &140810031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31097,6 +31118,11 @@ PrefabInstance:
       objectReference: {fileID: 1399553982}
     - target: {fileID: 2207907831722942954, guid: 5fac83bcb5ba446e1820c1763e302784,
         type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 140490266}
+    - target: {fileID: 2207907831722942954, guid: 5fac83bcb5ba446e1820c1763e302784,
+        type: 3}
       propertyPath: waveText
       value: 
       objectReference: {fileID: 1911078930}
@@ -31105,6 +31131,11 @@ PrefabInstance:
       propertyPath: energyText
       value: 
       objectReference: {fileID: 1399553982}
+    - target: {fileID: 2207907831722942954, guid: 5fac83bcb5ba446e1820c1763e302784,
+        type: 3}
+      propertyPath: waveAmount
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fac83bcb5ba446e1820c1763e302784, type: 3}
 --- !u!1001 &4202536426043262323

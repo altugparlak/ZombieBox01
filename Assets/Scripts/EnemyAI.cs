@@ -14,12 +14,14 @@ public class EnemyAI : MonoBehaviour
     public GameObject deathVFX;
 
     NavMeshAgent navMeshAgent;
+    EnemySpawner enemySpawner;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         target = FindObjectOfType<PlayerMovement>().transform;
         playerMovement = FindObjectOfType<PlayerMovement>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
         playerMovement.AddEnemy(this.gameObject.transform);
         enemyHealth = 100;
 
@@ -34,6 +36,8 @@ public class EnemyAI : MonoBehaviour
             GameObject explotion = Instantiate(deathVFX, transform.position, Quaternion.identity);
             Destroy(explotion, 1.5f);
             Destroy(this.gameObject);
+            enemySpawner.AddDestroyedEnemies();
+            
         }
     }
 
