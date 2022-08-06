@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
 
     private Transform target;
     private PlayerMovement playerMovement;
-
+    private Animator animator;
     public GameObject deathVFX;
 
     NavMeshAgent navMeshAgent;
@@ -20,6 +20,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         target = FindObjectOfType<PlayerMovement>().transform;
         playerMovement = FindObjectOfType<PlayerMovement>();
         enemySpawner = FindObjectOfType<EnemySpawner>();
@@ -28,14 +29,23 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    [System.Obsolete]
     void Update()
     {
         navMeshAgent.SetDestination(target.position);
+
+        if ((target.position - transform.position).magnitude < 2)
+        {
+            animator.SetBool("attacking", true);
+        }
+        else
+        {
+            animator.SetBool("attacking", false);
+        }
+
         if (enemyHealth <= 0)
         {
             playerMovement.RemoveEnemy(this.gameObject.transform);
-            int randomNumber = Random.RandomRange(0, 3);
+            int randomNumber = 0;
             GameObject deathVfx = deathVFXlist[randomNumber]; 
             GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
             Destroy(explotion, 1.5f);

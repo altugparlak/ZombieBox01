@@ -43,7 +43,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (enemies.Count != 0)
         {
-            GetClosestEnemy(enemies).gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
+            //GetClosestEnemy(enemies).gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
+            GetClosestEnemy(enemies);
         }
 
         if (target!=null)
