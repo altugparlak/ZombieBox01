@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Others")]
     [SerializeField] private GameObject enemyIndicator;
+    [SerializeField] private Camera mainCamera;
 
     public GameObject energy;
     public Joystick joystick;
@@ -51,9 +52,23 @@ public class PlayerMovement : MonoBehaviour
             if (distanceToTarget <= attackRange)
             {
                 playerShoot.ShootingProgress();
+
+
+                Vector3 lookVector = GetClosestEnemy(enemies).position - transform.position;
+                lookVector.y = transform.position.y;
+                Quaternion rot = Quaternion.LookRotation(lookVector);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
                 //Debug.Log("Attack!");
             }
+            else
+            {
+                SmoothlyTurnBacktoDefaultRotation();
+            }
 
+        }
+        else
+        {
+            SmoothlyTurnBacktoDefaultRotation();
         }
 
         transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
@@ -139,35 +154,6 @@ public class PlayerMovement : MonoBehaviour
         return bestTarget;
     }
 
-    //private Vector3 FindEnergyPosition()
-    //{
-    //    float yValue = energy.transform.position.z - transform.position.z;
-    //    float xValue = energy.transform.position.x - transform.position.x;
-
-    //    Vector3 energyPosition = new Vector3(xValue, yValue, 0);
-    //    angle = Mathf.Atan2(yValue, -xValue) * 180 / Mathf.PI;
-    //    //Debug.Log(angle);
-
-
-    //    return energyPosition;
-
-        
-    //}
-
-    //public float GetTheAngleBetweenPlayerAndEnergy()
-    //{
-    //    Vector3 energyPos = FindEnergyPosition();
-
-    //    Vector3 dir = energyPos - this.gameObject.transform.position;
-
-    //    angle = UtilsClass.GetAngleFromVectorFloat(dir);
-
-
-
-
-    //    return angle;
-    //}
-
     public void ActivateSpeedBoost()
     {
         StartCoroutine(SpeedBoost(3f));
@@ -233,10 +219,9 @@ public class PlayerMovement : MonoBehaviour
         return angleHolder;
     }
 
-    private void IsVisibleOnScreen(GameObject target)
+    private void IsVisibleOnScreen(GameObject targetIndicator)
     {
-        Camera mainCam = Camera.main;
-        Vector3 targetScreenPoint = mainCam.WorldToScreenPoint(target.GetComponent<Renderer>().bounds.center);
+        Vector3 targetScreenPoint = mainCamera.WorldToScreenPoint(targetIndicator.GetComponent<Renderer>().bounds.center);
 
         if ((targetScreenPoint.x < 0) || (targetScreenPoint.x > Screen.width) ||
                 (targetScreenPoint.y < 0) || (targetScreenPoint.y > Screen.height))
@@ -249,6 +234,12 @@ public class PlayerMovement : MonoBehaviour
             enemyIndicator.SetActive(false);
         }
 
+    }
+
+    private void SmoothlyTurnBacktoDefaultRotation()
+    {
+        var desiredRotQ = Quaternion.Euler(0, 0, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotQ, Time.deltaTime * 5);
     }
 
 

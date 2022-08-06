@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> deathVFXlist;
     [SerializeField] int enemyHealth;
 
     private Transform target;
@@ -27,13 +28,16 @@ public class EnemyAI : MonoBehaviour
 
     }
 
+    [System.Obsolete]
     void Update()
     {
         navMeshAgent.SetDestination(target.position);
         if (enemyHealth <= 0)
         {
             playerMovement.RemoveEnemy(this.gameObject.transform);
-            GameObject explotion = Instantiate(deathVFX, transform.position, Quaternion.identity);
+            int randomNumber = Random.RandomRange(0, 3);
+            GameObject deathVfx = deathVFXlist[randomNumber]; 
+            GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
             Destroy(explotion, 1.5f);
             Destroy(this.gameObject);
             enemySpawner.AddDestroyedEnemies();

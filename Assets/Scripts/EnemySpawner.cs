@@ -11,6 +11,7 @@ public class EnemySpawner : MonoBehaviour
     private int numberOfEnemiesForTheWave;
     private int spawnedEnemies = 0;
     private int destroyedEneimes = 0;
+    private float timeBetweenSpawns;
 
     GameSession gameSession;
 
@@ -19,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
     {
         gameSession = FindObjectOfType<GameSession>();
         numberOfEnemiesForTheWave = gameSession.waveAmount;
+        timeBetweenSpawns = gameSession.waveSpawningSpeed;
         Invoke("SpawningProgress", 2f);
     }
 
@@ -39,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnEnemy();
             canSpawn = false;
-            StartCoroutine(WaitForNextSpawn(3f));
+            StartCoroutine(WaitForNextSpawn(timeBetweenSpawns));
         }
     }
 

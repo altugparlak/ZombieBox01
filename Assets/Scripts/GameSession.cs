@@ -13,6 +13,8 @@ public class GameSession : MonoBehaviour
     [Header("Wave Specs")]
     [SerializeField] public int waveAmount = 20;
     [SerializeField] public int waveAmountIncreament = 10;
+    [Tooltip("Lower the number, faster the speed")]
+    [SerializeField] public float waveSpawningSpeed = 3f;
 
     EnemySpawner enemySpawner;
 
