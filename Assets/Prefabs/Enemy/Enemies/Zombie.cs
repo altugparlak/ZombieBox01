@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "New Zombie", menuName = "Zombie")]
 public class Zombie : ScriptableObject
 {
     public new string name;
