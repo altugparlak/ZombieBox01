@@ -7,7 +7,8 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private List<GameObject> deathVFXlist;
-    [SerializeField] int enemyHealth;
+    [SerializeField] private GameObject hitVFX;
+    [SerializeField] int enemyHealth = 200;
 
     private Transform target;
     private PlayerMovement playerMovement;
@@ -25,7 +26,6 @@ public class EnemyAI : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         enemySpawner = FindObjectOfType<EnemySpawner>();
         playerMovement.AddEnemy(this.gameObject.transform);
-        enemyHealth = 100;
 
     }
 
@@ -70,5 +70,10 @@ public class EnemyAI : MonoBehaviour
         
     }
 
+    public void Hit( )
+    {
+        GameObject hitEffect = Instantiate(hitVFX, target.position, Quaternion.identity);
+        Destroy(hitEffect, 1.5f);
+    }
 
 }

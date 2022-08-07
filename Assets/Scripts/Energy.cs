@@ -5,7 +5,7 @@ using UnityEngine;
 public class Energy : MonoBehaviour
 {
 
-    [SerializeField] float rotateSpeed = 1f;
+    [SerializeField] private float rotateSpeed = 1f;
 
     private void Update()
     {
