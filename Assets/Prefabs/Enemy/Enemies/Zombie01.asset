@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bdd76cc5fb2d4b6c9aac906ef166ffa, type: 3}
+  m_Name: Zombie01
+  m_EditorClassIdentifier: 
+  name: DumbZombie
+  health: 200
+  movementSpeed: 3.5
+  attackSpeed: 1
+  attackDamage: 0
+  smartAttack: 0

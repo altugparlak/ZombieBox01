@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//z01 dumb zombie
+//z02 smart zombie
 
 public class EnemyAI : MonoBehaviour
 {
+    [SerializeField] private Zombie zombie;
     [SerializeField] private List<GameObject> deathVFXlist;
     [SerializeField] private GameObject hitVFX;
     [SerializeField] int enemyHealth = 200;
-
     private Transform target;
     private PlayerMovement playerMovement;
     private Animator animator;
@@ -17,6 +19,8 @@ public class EnemyAI : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
     EnemySpawner enemySpawner;
+
+    private bool hitCheck = false;
 
     void Start()
     {
@@ -31,7 +35,11 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        navMeshAgent.SetDestination(target.position);
+        if (animator.GetBool("attacking") == false)
+        {
+            navMeshAgent.SetDestination(target.position);
+        }
+
 
         if ((target.position - transform.position).magnitude < 2)
         {
@@ -39,7 +47,20 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            animator.SetBool("attacking", false);
+
+            if (zombie.smartAttack)
+            {
+                if (hitCheck)
+                {
+                    animator.SetBool("attacking", false);
+                    hitCheck = false;
+                }
+            }
+            else
+            {
+                animator.SetBool("attacking", false);
+
+            }
         }
 
         if (enemyHealth <= 0)
@@ -72,6 +93,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Hit( )
     {
+        hitCheck = true;
         GameObject hitEffect = Instantiate(hitVFX, target.position, Quaternion.identity);
         Destroy(hitEffect, 1.5f);
     }
