@@ -14726,6 +14726,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c996deefae194f2db5f10b34a2c715c, type: 3}
+--- !u!1 &1044991394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3247040421737318094, guid: d6faac53f6287403e91fe81ad1057375,
+    type: 3}
+  m_PrefabInstance: {fileID: 5753666746305353617}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1050526578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31186,21 +31192,44 @@ PrefabInstance:
         type: 3}
       propertyPath: parent
       value: 
-      objectReference: {fileID: 1822448302}
+      objectReference: {fileID: 1044991394}
     - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
       propertyPath: dualShot
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: projectiles.Array.size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
       propertyPath: projectiles.Array.data[0]
       value: 
-      objectReference: {fileID: 1564468091806366, guid: 08987c81973e24e6cbe3ab68c8638879,
+      objectReference: {fileID: 1841414879310842, guid: afcd08cc8a5434b269e7b2cc5c18b5af,
         type: 3}
     - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
       propertyPath: projectiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 1453648102191072, guid: 8d9db2530f375449e9666f13a78529c4,
+        type: 3}
+    - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: projectiles.Array.data[2]
+      value: 
+      objectReference: {fileID: 1564468091806366, guid: 08987c81973e24e6cbe3ab68c8638879,
+        type: 3}
+    - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: projectiles.Array.data[3]
+      value: 
+      objectReference: {fileID: 1658112780640456, guid: 920b2bcc093a74e79a2d55ddc2cac61f,
+        type: 3}
+    - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: projectiles.Array.data[4]
       value: 
       objectReference: {fileID: 1564468091806366, guid: 489b3a2ec3e7cf949925d1b34247d1a9,
         type: 3}
