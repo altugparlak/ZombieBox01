@@ -19,7 +19,7 @@ public class GameSession : MonoBehaviour
     EnemySpawner enemySpawner;
 
     private int energyAmount;
-    private int waveIndex;
+    public int waveIndex;
 
 
     void Start()

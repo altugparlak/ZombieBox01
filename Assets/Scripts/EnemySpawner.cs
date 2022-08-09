@@ -5,15 +5,18 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<Transform> spawnPoints;
-    public GameObject enemy;
-    public GameObject enemyParent;
+    [SerializeField] private List<GameObject> enemies;
+
     private bool canSpawn = true;
     private int numberOfEnemiesForTheWave;
     private int spawnedEnemies = 0;
     private int destroyedEneimes = 0;
     private float timeBetweenSpawns;
 
+    public GameObject enemyParent;
     GameSession gameSession;
+    GameObject enemy;
+
 
     [System.Obsolete]
     private void Start()
@@ -48,6 +51,15 @@ public class EnemySpawner : MonoBehaviour
     [System.Obsolete]
     public void SpawnEnemy()
     {
+        int wave = gameSession.waveIndex;
+        if (wave == 2)
+        {
+            enemy = enemies[1];
+        }
+        else
+        {
+            enemy = enemies[0];
+        }
         int random = Random.RandomRange(0, 6);
         Vector3 spawnPosition = spawnPoints[random].position;
         GameObject shoot = Instantiate(enemy, spawnPosition, Quaternion.identity);
