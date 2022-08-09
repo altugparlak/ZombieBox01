@@ -19,12 +19,13 @@ public class PlayerShoot : MonoBehaviour
     PlayerMovement playerMovement;
 
     private bool canShoot = true;
+    private int projectileIndex = 0;
     public float shootingWaitTime = 1.5f;
 
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        projectile = projectiles[1];
+        projectile = projectiles[projectileIndex];
     }
     public void ShootingProgress(Vector3 lookvector)
     {
@@ -78,6 +79,22 @@ public class PlayerShoot : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         canShoot = true;
+    }
+
+    public void SwitchWeapon()
+    {
+        if (projectileIndex == 0)
+        {
+            projectileIndex = 1;
+            projectile = projectiles[projectileIndex];
+
+        }
+        else
+        {
+            projectileIndex = 0;
+            projectile = projectiles[projectileIndex];
+
+        }
     }
 
 

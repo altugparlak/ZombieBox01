@@ -28084,7 +28084,7 @@ PrefabInstance:
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
@@ -28108,6 +28108,11 @@ PrefabInstance:
       objectReference: {fileID: 1994364090}
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 5275570813057777742}
+    - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: useEnergy
       objectReference: {fileID: 0}
@@ -28115,6 +28120,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: ButtonClickControl
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SwitchWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
@@ -28128,6 +28138,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PlayerShoot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 30
       objectReference: {fileID: 0}
@@ -28135,6 +28150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6027664271082266820, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
@@ -31034,6 +31054,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf2f0f3fbf54a2481b2dd767d1b39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5275570813057777742 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+    type: 3}
+  m_PrefabInstance: {fileID: 5753666746305353617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c5c7e29acf624861be97561a4c89a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5362824846011369519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31155,6 +31187,23 @@ PrefabInstance:
       propertyPath: parent
       value: 
       objectReference: {fileID: 1822448302}
+    - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: dualShot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: projectiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1564468091806366, guid: 08987c81973e24e6cbe3ab68c8638879,
+        type: 3}
+    - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: projectiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 1564468091806366, guid: 489b3a2ec3e7cf949925d1b34247d1a9,
+        type: 3}
     - target: {fileID: 497298147694821177, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
       propertyPath: m_Name
