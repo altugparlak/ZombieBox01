@@ -31,6 +31,7 @@ public class ProjectileMovement : MonoBehaviour
     void Update()
     {
         myrigidbody.velocity = direction * speed;
+        
     }
     void OnCollisionEnter(Collision collision)
     {
