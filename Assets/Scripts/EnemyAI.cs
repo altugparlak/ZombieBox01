@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Zombie zombie;
     [SerializeField] private List<GameObject> deathVFXlist;
     [SerializeField] private GameObject hitVFX;
-    [SerializeField] int enemyHealth = 200;
+    private int enemyHealth;
     private Transform target;
     private PlayerMovement playerMovement;
     private Animator animator;
@@ -19,18 +19,23 @@ public class EnemyAI : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
     EnemySpawner enemySpawner;
+    GameSession gameSession;
 
     private bool hitCheck = false;
 
     void Start()
     {
+        // Burada findOnject yapmamak lazım çünkü her zombie find ederse sıkıntı olabilir
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         target = FindObjectOfType<PlayerMovement>().transform;
         playerMovement = FindObjectOfType<PlayerMovement>();
         enemySpawner = FindObjectOfType<EnemySpawner>();
+        gameSession = FindObjectOfType<GameSession>();
         playerMovement.AddEnemy(this.gameObject.transform);
 
+        navMeshAgent.speed = zombie.movementSpeed;
+        EnemyHealthSetUpForTheWave();
     }
 
     void Update()
@@ -96,6 +101,12 @@ public class EnemyAI : MonoBehaviour
         hitCheck = true;
         GameObject hitEffect = Instantiate(hitVFX, target.position, Quaternion.identity);
         Destroy(hitEffect, 1.5f);
+    }
+
+    private void EnemyHealthSetUpForTheWave()
+    {
+        int waveHealthIncrement = gameSession.healthIncrementforZombies;
+        enemyHealth = zombie.health + waveHealthIncrement;
     }
 
 }

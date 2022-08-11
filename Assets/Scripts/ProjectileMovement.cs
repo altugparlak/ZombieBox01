@@ -18,6 +18,8 @@ public class ProjectileMovement : MonoBehaviour
 
     public float hitOffset = 0f;
 
+    private int hitCount = 0;
+
     void Start()
     {
         myrigidbody = GetComponent<Rigidbody>();
@@ -68,6 +70,12 @@ public class ProjectileMovement : MonoBehaviour
                 detachedPrefab.transform.parent = null;
             }
         }
+        //hitCount++;
+        //Debug.Log(hitCount);
+        //if (hitCount == 2)
+        //{
+        //    Destroy(gameObject);
+        //}
         Destroy(gameObject);
     }
 }

@@ -56,6 +56,10 @@ public class EnemySpawner : MonoBehaviour
         {
             enemy = enemies[1];
         }
+        else if(wave == 3)
+        {
+            enemy = enemies[2];
+        }
         else
         {
             enemy = enemies[0];
