@@ -15,10 +15,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] float attackRange = 5f;
 
-
     [Header("Others")]
     [SerializeField] private GameObject enemyIndicator;
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private Text coinDisplayText;
 
     public GameObject energy;
     public Joystick joystick;
@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float angleHolder;
     private float speedvalueHolder;
+    private int coin = 100;
+
 
 
     void Start()
@@ -36,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         enemies = new List<Transform>();
         playerShoot = GetComponent<PlayerShoot>();
         speedvalueHolder = speed;
+        coinDisplayText.text = coin.ToString();
     }
 
     void Update()
@@ -241,6 +244,29 @@ public class PlayerMovement : MonoBehaviour
     {
         var desiredRotQ = Quaternion.Euler(0, 0, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotQ, Time.deltaTime * 5);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.tag);
+        if (other.tag == "Coin")
+        {
+            Debug.Log("DestroyCoin");
+            AddCoin(10);
+            //Destroy(other.gameObject);
+        }
+    }
+
+    public void AddCoin(int value)
+    {
+        coin += value;
+        coinDisplayText.text = coin.ToString();
+    }
+
+    public void SpendCoin(int value)
+    {
+        coin -= value;
+        coinDisplayText.text = coin.ToString();
     }
 
 

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private Zombie zombie;
     [SerializeField] private List<GameObject> deathVFXlist;
     [SerializeField] private GameObject hitVFX;
+    [SerializeField] private GameObject coin;
     private int enemyHealth;
     private Transform target;
     private PlayerMovement playerMovement;
@@ -21,7 +24,11 @@ public class EnemyAI : MonoBehaviour
     EnemySpawner enemySpawner;
     GameSession gameSession;
 
+    private List<int> randomList = new List<int>();
+    private List<int> shuffled;
     private bool hitCheck = false;
+    int randomNumber;
+
 
     void Start()
     {
@@ -33,6 +40,9 @@ public class EnemyAI : MonoBehaviour
         enemySpawner = FindObjectOfType<EnemySpawner>();
         gameSession = FindObjectOfType<GameSession>();
         playerMovement.AddEnemy(this.gameObject.transform);
+
+        ShuffleList();
+        randomNumber = UnityEngine.Random.Range(0, 100);
 
         navMeshAgent.speed = zombie.movementSpeed;
         EnemyHealthSetUpForTheWave();
@@ -70,9 +80,12 @@ public class EnemyAI : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
+            if (shuffled[randomNumber] == 1)
+            {
+                CoinSpawn();
+            }
             playerMovement.RemoveEnemy(this.gameObject.transform);
-            int randomNumber = 0;
-            GameObject deathVfx = deathVFXlist[randomNumber]; 
+            GameObject deathVfx = deathVFXlist[0]; 
             GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
             Destroy(explotion, 1.5f);
             Destroy(this.gameObject);
@@ -98,6 +111,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Hit( )
     {
+        playerMovement.GetComponent<PlayerHealth>().losePlayerHealth(100);
         hitCheck = true;
         GameObject hitEffect = Instantiate(hitVFX, target.position, Quaternion.identity);
         Destroy(hitEffect, 1.5f);
@@ -107,6 +121,30 @@ public class EnemyAI : MonoBehaviour
     {
         int waveHealthIncrement = gameSession.healthIncrementforZombies;
         enemyHealth = zombie.health + waveHealthIncrement;
+    }
+
+    private void ShuffleList()
+    {
+        for (int i = 0; i < 90; i++)
+        {
+            randomList.Add(0);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            randomList.Add(1);
+        }
+        //ilk element ağır mermi ikincisi hafif mermi, bunları yeni bir liste oluşturup karıştırdık.
+        shuffled = randomList.OrderBy(x => Guid.NewGuid()).ToList();
+
+    }
+
+    private void CoinSpawn()
+    {
+        Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z);
+        //offset
+        Instantiate(coin, spawnPosition, Quaternion.identity);
+        coin.transform.eulerAngles = new Vector3(90f, 0f, 0f);
+
     }
 
 }

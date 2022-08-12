@@ -837,7 +837,7 @@ MonoBehaviour:
   deathVFXlist:
   - {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
   hitVFX: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
-  enemyHealth: 200
+  coin: {fileID: 9053529705934535877, guid: 5f71c6876cd644beca0475c2c62d0ac7, type: 3}
   deathVFX: {fileID: 1636871764186634, guid: 9a7c6bfff5ad87d409e200fe3a0d5036, type: 3}
 --- !u!136 &6784900763359691704
 CapsuleCollider:

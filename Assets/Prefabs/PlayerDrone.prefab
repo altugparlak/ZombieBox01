@@ -3127,6 +3127,7 @@ GameObject:
   - component: {fileID: 482871505436874727}
   - component: {fileID: 482871505436874728}
   - component: {fileID: 482871505436874729}
+  - component: {fileID: 5275570813057777747}
   - component: {fileID: 482871505436874726}
   - component: {fileID: 2034607339693670556}
   m_Layer: 6
@@ -3249,7 +3250,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectiles:
-  - {fileID: 1564468091806366, guid: 489b3a2ec3e7cf949925d1b34247d1a9, type: 3}
   - {fileID: 1564468091806366, guid: 08987c81973e24e6cbe3ab68c8638879, type: 3}
   projectile: {fileID: 1564468091806366, guid: 489b3a2ec3e7cf949925d1b34247d1a9, type: 3}
   parent: {fileID: 0}
@@ -3258,6 +3258,18 @@ MonoBehaviour:
   dualBulletFireTransform2: {fileID: 8163410747802245534}
   dualShot: 0
   shootingWaitTime: 1.5
+--- !u!114 &5275570813057777747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497298147694821177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff21afab5d5ac42bb98f6c08010b51c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &482871505436874726
 CharacterController:
   m_ObjectHideFlags: 0

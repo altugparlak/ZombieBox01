@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2014109522}
   - component: {fileID: 2014109523}
   m_Layer: 11
-  m_Name: Energy
-  m_TagString: Energy
+  m_Name: Coin
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9053529705934535877}
-  m_LocalRotation: {x: 0.5185989, y: 0.48068205, z: -0.48068205, w: 0.5185989}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: -6.47}
-  m_LocalScale: {x: 1, y: 0.37348, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.37348, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

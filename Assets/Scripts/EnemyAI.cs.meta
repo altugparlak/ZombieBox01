@@ -3,7 +3,11 @@ guid: c3aecc8e8c2744dc9aa1d3209800b266
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - zombie: {instanceID: 0}
+  - hitVFX: {instanceID: 0}
+  - coin: {fileID: 9053529705934535877, guid: 5f71c6876cd644beca0475c2c62d0ac7, type: 3}
+  - deathVFX: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
