@@ -13850,6 +13850,11 @@ PrefabInstance:
       propertyPath: rotateSpeed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5275570813057777747, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5753666745268118592, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
       propertyPath: field of view
@@ -72693,6 +72698,7 @@ MonoBehaviour:
   deathVFXlist:
   - {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
   hitVFX: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
+  coin: {fileID: 0}
   deathVFX: {fileID: 1636871764186634, guid: 9a7c6bfff5ad87d409e200fe3a0d5036, type: 3}
 --- !u!195 &5421914050448220002
 NavMeshAgent:
@@ -72816,6 +72822,7 @@ MonoBehaviour:
   deathVFXlist:
   - {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
   hitVFX: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
+  coin: {fileID: 0}
   deathVFX: {fileID: 1636871764186634, guid: 9a7c6bfff5ad87d409e200fe3a0d5036, type: 3}
 --- !u!195 &6784900763572353361
 NavMeshAgent:
@@ -73863,6 +73870,7 @@ MonoBehaviour:
   deathVFXlist:
   - {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
   hitVFX: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
+  coin: {fileID: 0}
   deathVFX: {fileID: 1636871764186634, guid: 9a7c6bfff5ad87d409e200fe3a0d5036, type: 3}
 --- !u!95 &7524793398811918739
 Animator:
