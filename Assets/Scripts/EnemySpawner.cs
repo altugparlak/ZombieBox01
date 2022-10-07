@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private List<Transform> spawnPoints;
-    [SerializeField] private List<GameObject> enemies;
+    [SerializeField] private List<Wave> waves;
+
 
     private bool canSpawn = true;
     private int numberOfEnemiesForTheWave;
@@ -16,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyParent;
     GameSession gameSession;
     GameObject enemy;
+    Wave choosenWave;
 
 
     [System.Obsolete]
@@ -24,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
         gameSession = FindObjectOfType<GameSession>();
         numberOfEnemiesForTheWave = gameSession.waveAmount;
         timeBetweenSpawns = gameSession.waveSpawningSpeed;
+        SetTheWave();
         Invoke("SpawningProgress", 2f);
     }
 
@@ -51,19 +54,9 @@ public class EnemySpawner : MonoBehaviour
     [System.Obsolete]
     public void SpawnEnemy()
     {
-        int wave = gameSession.waveIndex;
-        if (wave == 2)
-        {
-            enemy = enemies[1];
-        }
-        else if(wave == 3)
-        {
-            enemy = enemies[2];
-        }
-        else
-        {
-            enemy = enemies[0];
-        }
+        int randomEnemy = Random.RandomRange(0, choosenWave.zombies.Count);
+        enemy = choosenWave.zombies[randomEnemy];
+
         int random = Random.RandomRange(0, 6);
         Vector3 spawnPosition = spawnPoints[random].position;
         GameObject shoot = Instantiate(enemy, spawnPosition, Quaternion.identity);
@@ -104,7 +97,22 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartTheNextWave()
     {
+        SetTheWave();
         canSpawn = true;
         Invoke("SpawningProgress", 8f);
+    }
+
+    public void SetTheWave()
+    {
+        int wave = gameSession.waveIndex - 1;
+        Debug.Log(wave);
+        if (wave > 10)
+        {
+
+        }
+        else
+        {
+            choosenWave = waves[wave];
+        }
     }
 }

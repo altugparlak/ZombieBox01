@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
         MoveWithController();
         MoveWithKeyboard();
-        IsVisibleOnScreen(energy);
+        //IsVisibleOnScreen(energy);
         if (speedBoostActivated)
         {
             SpeedBoostObject.transform.position = transform.position;
@@ -248,12 +248,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.tag == "Coin")
         {
-            Debug.Log("DestroyCoin");
             AddCoin(10);
-            //Destroy(other.gameObject);
+            Destroy(other.gameObject);
         }
     }
 

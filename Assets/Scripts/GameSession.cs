@@ -25,13 +25,16 @@ public class GameSession : MonoBehaviour
     private int energyAmount;
     public int waveIndex;
 
+    private void Awake()
+    {
+        waveIndex = 1;
 
+    }
     void Start()
     {
         enemySpawner = FindObjectOfType<EnemySpawner>();
 
-        waveIndex = 1;
-        healthIncrementforZombies = (waveIndex-1) * 100;
+        //healthIncrementforZombies = (waveIndex-1) * 100;
         energyAmount = 100;
         energyText.text = energyAmount.ToString();
         waveText.text = $"Wave {waveIndex}";
@@ -55,7 +58,7 @@ public class GameSession : MonoBehaviour
     public void SetUpTheNextWave()
     {
         waveIndex++;
-        healthIncrementforZombies = (waveIndex - 1) * 100;
+        //healthIncrementforZombies = (waveIndex - 1) * 100;
         waveText.text = $"Wave {waveIndex}";
         waveAmount += waveAmountIncreament;
         enemySpawner.SetTheNumberOfEnemiesForTheWave();
