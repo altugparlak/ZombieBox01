@@ -121,6 +121,8 @@ public class EnemyAI : MonoBehaviour
     {
         int waveHealthIncrement = gameSession.healthIncrementforZombies;
         enemyHealth = zombie.health + waveHealthIncrement;
+
+        
     }
 
     private void ShuffleList()
