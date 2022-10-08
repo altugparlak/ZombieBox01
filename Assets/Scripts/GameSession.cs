@@ -11,8 +11,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] private Text waveText;
 
     [Header("Wave Specs")]
-    [SerializeField] public int waveAmount = 20;
-    [SerializeField] public int waveAmountIncreament = 10;
+    //[SerializeField] public int waveAmount = 20;
+    //[SerializeField] public int waveAmountIncreament = 10;
     [Tooltip("Lower the number, faster the speed")]
     [SerializeField] public float waveSpawningSpeed = 3f;
 
@@ -60,8 +60,8 @@ public class GameSession : MonoBehaviour
         waveIndex++;
         //healthIncrementforZombies = (waveIndex - 1) * 100;
         waveText.text = $"Wave {waveIndex}";
-        waveAmount += waveAmountIncreament;
-        enemySpawner.SetTheNumberOfEnemiesForTheWave();
+        //waveAmount += waveAmountIncreament;
+        enemySpawner.SetTheWave();
         Invoke("SplashWaveImageShowUp", 2f);
     }
 

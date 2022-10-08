@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bdd76cc5fb2d4b6c9aac906ef166ffa, type: 3}
-  m_Name: Zombie03
+  m_Name: Zombie05
   m_EditorClassIdentifier: 
-  name: Crawler
-  health: 150
-  movementSpeed: 3
-  attackSpeed: 1.3
+  name: FatZombie
+  health: 500
+  movementSpeed: 1.5
+  attackSpeed: 1.5
   attackDamage: 0
-  smartAttack: 1
+  smartAttack: 0

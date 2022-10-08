@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdd76cc5fb2d4b6c9aac906ef166ffa, type: 3}
   m_Name: Zombie02
   m_EditorClassIdentifier: 
-  name: FastZombie_z16
+  name: FastZombie
   health: 150
   movementSpeed: 5
   attackSpeed: 1.3

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Wave : ScriptableObject
 {
     public List<GameObject> zombies;
+    public int totalNumberOfZombies;
     public int totalCoin;
     public float coinSpawnPossibility;
     public int totoldualW;

@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 6784900763359691711}
   - component: {fileID: 6784900763359691704}
   m_Layer: 0
-  m_Name: z16
+  m_Name: FastZombie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

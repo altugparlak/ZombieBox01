@@ -24,8 +24,6 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         gameSession = FindObjectOfType<GameSession>();
-        numberOfEnemiesForTheWave = gameSession.waveAmount;
-        timeBetweenSpawns = gameSession.waveSpawningSpeed;
         SetTheWave();
         Invoke("SpawningProgress", 2f);
     }
@@ -87,25 +85,16 @@ public class EnemySpawner : MonoBehaviour
         destroyedEneimes++;
     }
 
-    public void SetTheNumberOfEnemiesForTheWave()
-    {
-        numberOfEnemiesForTheWave = gameSession.waveAmount;
-        Debug.Log("Wave Amount: " + numberOfEnemiesForTheWave);
-        StartTheNextWave();
-
-    }
-
-    public void StartTheNextWave()
-    {
-        SetTheWave();
-        canSpawn = true;
-        Invoke("SpawningProgress", 8f);
-    }
-
     public void SetTheWave()
     {
+        timeBetweenSpawns = gameSession.waveSpawningSpeed;
+
         int wave = gameSession.waveIndex - 1;
-        Debug.Log(wave);
+        int waveAmount = waves[wave].totalNumberOfZombies;
+        numberOfEnemiesForTheWave = waveAmount;
+        Debug.Log("Wave number: " + wave + 1);
+        Debug.Log("Wave Amount: " + waveAmount);
+
         if (wave > 10)
         {
 
@@ -114,5 +103,15 @@ public class EnemySpawner : MonoBehaviour
         {
             choosenWave = waves[wave];
         }
+        StartTheNextWave();
+
     }
+
+    public void StartTheNextWave()
+    {
+        canSpawn = true;
+        Invoke("SpawningProgress", 8f);
+    }
+
+    
 }

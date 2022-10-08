@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 7524793397376276318}
   - component: {fileID: 7524793397376276316}
   m_Layer: 12
-  m_Name: z04
+  m_Name: CrawlerZombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

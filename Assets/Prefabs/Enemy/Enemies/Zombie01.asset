@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdd76cc5fb2d4b6c9aac906ef166ffa, type: 3}
   m_Name: Zombie01
   m_EditorClassIdentifier: 
-  name: Zombie_z01
+  name: Standard
   health: 200
   movementSpeed: 3.5
   attackSpeed: 1

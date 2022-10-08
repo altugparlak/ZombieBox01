@@ -26,7 +26,7 @@ public class ProjectileMovement : MonoBehaviour
         playerShoot = FindObjectOfType<PlayerShoot>();
         playerMovement = FindObjectOfType<PlayerMovement>();
 
-        direction = playerMovement.target.position - playerShoot.transform.position;
+        direction = playerMovement.target.position + new Vector3(0, 1f, 0) - playerShoot.transform.position;
     }
 
     // Update is called once per frame
