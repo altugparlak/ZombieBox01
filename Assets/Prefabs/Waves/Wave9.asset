@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f35446875b04e1cb734aecf83c33b5, type: 3}
-  m_Name: Wave3
+  m_Name: Wave9
   m_EditorClassIdentifier: 
   zombies:
-  - {fileID: 5361622065546417323, guid: ca3332cc768c749fdbaa38ec243d0284, type: 3}
-  - {fileID: 7584019285631244257, guid: 9ff696c5601464dfaace4b5fc9dc6877, type: 3}
-  element0: 50
-  element1: 50
+  - {fileID: 8243100378604148406, guid: 429651ccd5a8f4ca49158fdf63b53354, type: 3}
+  - {fileID: 6881198238611358521, guid: a8e9e1352d3ad4a97bc2ae43a26dc317, type: 3}
+  element0: 30
+  element1: 70
   element2: 0
   element3: 0
   element4: 0
-  totalNumberOfZombies: 20
+  totalNumberOfZombies: 15
   totalCoin: 10
   coinSpawnPossibility: 20
-  totoldualW: 0
-  dualWeaponShotSpawnPossibility: 0
+  totoldualW: 1
+  dualWeaponShotSpawnPossibility: 10

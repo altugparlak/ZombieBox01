@@ -92,7 +92,7 @@ public class EnemySpawner : MonoBehaviour
         int wave = gameSession.waveIndex - 1;
         int waveAmount = waves[wave].totalNumberOfZombies;
         numberOfEnemiesForTheWave = waveAmount;
-        Debug.Log("Wave number: " + wave + 1);
+        Debug.Log("Wave number: " + (wave + 1));
         Debug.Log("Wave Amount: " + waveAmount);
 
         if (wave > 10)
