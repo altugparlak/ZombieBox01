@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombies:
   - {fileID: 5361622065546417323, guid: ca3332cc768c749fdbaa38ec243d0284, type: 3}
-  totalCoin: 10
+  totalNumberOfZombies: 10
+  totalCoin: 5
   coinSpawnPossibility: 50
   totoldualW: 1
   dualWeaponShotSpawnPossibility: 0
