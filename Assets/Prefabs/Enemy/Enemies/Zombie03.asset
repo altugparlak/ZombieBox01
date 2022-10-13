@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdd76cc5fb2d4b6c9aac906ef166ffa, type: 3}
   m_Name: Zombie03
   m_EditorClassIdentifier: 
+  zdc: 0.5
   name: Crawler
   health: 150
   movementSpeed: 3

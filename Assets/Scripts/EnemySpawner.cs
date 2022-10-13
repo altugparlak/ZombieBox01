@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -13,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
     private int spawnedEnemies = 0;
     private int destroyedEneimes = 0;
     private float timeBetweenSpawns;
+    private List<GameObject> Zombies = new List<GameObject>(); // first we append
+    private List<GameObject> Zombieshuffled = new List<GameObject>(); // then we shuffle the list
 
     public GameObject enemyParent;
     GameSession gameSession;
@@ -26,6 +30,7 @@ public class EnemySpawner : MonoBehaviour
         gameSession = FindObjectOfType<GameSession>();
         SetTheWave();
         Invoke("SpawningProgress", 2f);
+
     }
 
     private void Update()
@@ -52,10 +57,10 @@ public class EnemySpawner : MonoBehaviour
     [System.Obsolete]
     public void SpawnEnemy()
     {
-        int randomEnemy = Random.RandomRange(0, choosenWave.zombies.Count);
-        enemy = choosenWave.zombies[randomEnemy];
+        int randomEnemy = UnityEngine.Random.RandomRange(0, Zombieshuffled.Count);
+        enemy = Zombieshuffled[randomEnemy];
 
-        int random = Random.RandomRange(0, 6);
+        int random = UnityEngine.Random.RandomRange(0, 6);
         Vector3 spawnPosition = spawnPoints[random].position;
         GameObject shoot = Instantiate(enemy, spawnPosition, Quaternion.identity);
         shoot.transform.SetParent(enemyParent.transform);
@@ -97,11 +102,13 @@ public class EnemySpawner : MonoBehaviour
 
         if (wave > 10)
         {
-
+            choosenWave = waves[waves.Count];
+            WaveRandomOperator(choosenWave);
         }
         else
         {
             choosenWave = waves[wave];
+            WaveRandomOperator(choosenWave);
         }
         StartTheNextWave();
 
@@ -113,5 +120,20 @@ public class EnemySpawner : MonoBehaviour
         Invoke("SpawningProgress", 8f);
     }
 
-    
+    private void WaveRandomOperator(Wave wave)
+    {
+        Zombies.Clear();
+        Zombieshuffled.Clear();
+        for (int i = 0; i < wave.zombies.Count; i++)
+        {
+            for (int j = 0; j < wave.ZombieSpawnProbs[i]; j++)
+            {
+                Zombies.Add(wave.zombies[i]);
+            }
+        }
+        Zombieshuffled = Zombies.OrderBy(x => Guid.NewGuid()).ToList();
+
+    }
+
+
 }

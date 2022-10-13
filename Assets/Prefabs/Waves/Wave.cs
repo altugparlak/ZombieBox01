@@ -9,16 +9,8 @@ public class Wave : ScriptableObject
     [SerializeField] public List<GameObject> zombies;
 
     [Header("Zombie Spawn Probabilities in the Zombies List")]
-    [Tooltip("Probability of the first element in the Zombies List<>")]
-    [SerializeField] public int element0;
-    [Tooltip("Probability of the second element in the Zombies List<>")]
-    [SerializeField] public int element1;
-    [Tooltip("Probability of the third element in the Zombies List<>")]
-    [SerializeField] public int element2;
-    [Tooltip("Probability of the fourth element in the Zombies List<>")]
-    [SerializeField] public int element3;
-    [Tooltip("Probability of the fifth element in the Zombies List<>")]
-    [SerializeField] public int element4;
+    [Tooltip("1st element is probability of 1st element of the zombies List<>")]
+    [SerializeField] public List<int> ZombieSpawnProbs; // Total must be 100
 
 
     [Header("Wave Spects")]

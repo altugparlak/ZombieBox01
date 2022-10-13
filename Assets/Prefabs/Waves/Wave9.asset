@@ -15,11 +15,7 @@ MonoBehaviour:
   zombies:
   - {fileID: 8243100378604148406, guid: 429651ccd5a8f4ca49158fdf63b53354, type: 3}
   - {fileID: 6881198238611358521, guid: a8e9e1352d3ad4a97bc2ae43a26dc317, type: 3}
-  element0: 30
-  element1: 70
-  element2: 0
-  element3: 0
-  element4: 0
+  ZombieSpawnProbs: 1e00000046000000
   totalNumberOfZombies: 15
   totalCoin: 10
   coinSpawnPossibility: 20
