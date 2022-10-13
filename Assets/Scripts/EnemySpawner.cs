@@ -137,19 +137,18 @@ public class EnemySpawner : MonoBehaviour
             float zombieSpawnPossibility = 0;
             zombieSpawnPossibility = choosenWave.zombies[i].GetComponent<EnemyAI>().zombie.zdc / zombieCoefTotal * 100;
             //Debug.Log(choosenWave.zombies[i].name + ": " + zombieSpawnPossibility);
-            Debug.Log(choosenWave.zombies[i].name + ": " + (int)Math.Round(zombieSpawnPossibility));
+            //Debug.Log(choosenWave.zombies[i].name + ": " + (int)Math.Round(zombieSpawnPossibility));
 
-        }
-
-
-
-        for (int i = 0; i < wave.zombies.Count; i++)
-        {
-            for (int j = 0; j < wave.ZombieSpawnProbs[i]; j++)
+            int index = 0;
+            int zombieSP = (int)Math.Round(zombieSpawnPossibility);
+            for (int j = 0; j < zombieSP; j++)
             {
-                Zombies.Add(wave.zombies[i]);
+                index++;
+                Zombies.Add(choosenWave.zombies[i]);
             }
+            Debug.Log(choosenWave.zombies[i].name + ": " + index);
         }
+
         Zombieshuffled = Zombies.OrderBy(x => Guid.NewGuid()).ToList();
 
     }

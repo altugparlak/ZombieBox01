@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    [SerializeField] float padding = 1f;
-    [SerializeField] float moveSpeed = 5f;
+    //[SerializeField] float padding = 1f;
+    //[SerializeField] float moveSpeed = 5f;
     RectTransform rectTransform;
 
     PlayerMovement playerMovement;

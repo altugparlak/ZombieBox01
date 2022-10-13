@@ -6,7 +6,7 @@ using UnityEngine;
 public class Zombie : ScriptableObject
 {
     [Tooltip("Zombie Difficulty Coefficient, must be between 0 and 1")]
-    [SerializeField] public float zdc;
+    [SerializeField] public float zdc; // This value provides how many times you wanna see this zombie on a level
     public new string name;
     public int health;
     public float movementSpeed;
