@@ -10,7 +10,7 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private Zombie zombie;
+    [SerializeField] public Zombie zombie;
     [SerializeField] private List<GameObject> deathVFXlist;
     [SerializeField] private GameObject hitVFX;
     [SerializeField] private GameObject coin;
