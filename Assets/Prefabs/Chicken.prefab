@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 5730958417194366400}
   m_Layer: 16
   m_Name: Chicken
-  m_TagString: Untagged
+  m_TagString: Chicken
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -446,7 +446,7 @@ Transform:
   m_GameObject: {fileID: 6245364870312761597}
   m_LocalRotation: {x: 0, y: 0.89446664, z: 0, w: 0.44713473}
   m_LocalPosition: {x: -6.95, y: 0.39, z: 2.52}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6245364870312985817}
@@ -487,8 +487,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  chickenPath: {fileID: 0}
   target: {fileID: 0}
+  animator: {fileID: 0}
   moving: 0
+  running: 0
 --- !u!195 &920245537049647454
 NavMeshAgent:
   m_ObjectHideFlags: 0

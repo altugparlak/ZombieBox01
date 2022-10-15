@@ -7,6 +7,7 @@ public class ChickenPath : MonoBehaviour
     [SerializeField] private float xLength;
     [SerializeField] private float zLength;
     [SerializeField] private GameObject newPositionGameObj;
+
     [SerializeField] private ChickenBrain chickenBrain;
 
     private int timeHolder = 0;
@@ -30,13 +31,13 @@ public class ChickenPath : MonoBehaviour
     }
 
     [System.Obsolete]
-    private void CreateNewPosition()
+    public void CreateNewPosition()
     {
-        timeHolder += 5;
+        timeHolder += 10;
         Vector3 newPosition;
-        float positionX = transform.position.x + Random.RandomRange(-(xLength / 2), (xLength / 2));
+        float positionX = transform.position.x + Random.RandomRange(-(xLength / 2), (zLength / 2));
         float positionY = 1f;
-        float positionZ = transform.position.z + Random.RandomRange(-(xLength / 2), (xLength / 2));
+        float positionZ = transform.position.z + Random.RandomRange(-(xLength / 2), (zLength / 2));
         newPosition = new Vector3(positionX, positionY, positionZ);
         newPositionGameObj.transform.position = newPosition;
         chickenBrain.target = newPositionGameObj.transform;
@@ -49,4 +50,5 @@ public class ChickenPath : MonoBehaviour
         Gizmos.color = new Color(1, 0, 0, 0.2f);
         Gizmos.DrawCube(transform.position, new Vector3(xLength, 0.1f, zLength));
     }
+
 }

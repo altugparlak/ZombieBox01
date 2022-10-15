@@ -160,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d633947b74f8f4f7ab53118da679fb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xLength: 10
-  zLength: 10
+  xLength: 20
+  zLength: 20
   newPositionGameObj: {fileID: 8257966485251103133}
   chickenBrain: {fileID: 5994396706033185559}
 --- !u!1001 &4400655193003019973
@@ -184,7 +184,7 @@ PrefabInstance:
     - target: {fileID: 6245364870312985821, guid: ee2d2db4f4a2e4a45a62bd6cc006c781,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.8399997
+      value: -2.83
       objectReference: {fileID: 0}
     - target: {fileID: 6245364870312985821, guid: ee2d2db4f4a2e4a45a62bd6cc006c781,
         type: 3}
@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 6245364870312985821, guid: ee2d2db4f4a2e4a45a62bd6cc006c781,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.47
+      value: -1.12
       objectReference: {fileID: 0}
     - target: {fileID: 6245364870312985821, guid: ee2d2db4f4a2e4a45a62bd6cc006c781,
         type: 3}
@@ -231,6 +231,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7935945756350709202, guid: ee2d2db4f4a2e4a45a62bd6cc006c781,
+        type: 3}
+      propertyPath: chickenPath
+      value: 
+      objectReference: {fileID: 8257966486862625961}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee2d2db4f4a2e4a45a62bd6cc006c781, type: 3}
 --- !u!114 &5994396706033185559 stripped

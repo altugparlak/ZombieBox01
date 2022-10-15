@@ -27,10 +27,12 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController characterController;
     public Transform target;
 
+
     private float angleHolder;
     private float speedvalueHolder;
     private int coin = 100;
 
+    public GameObject chicken;
 
 
     void Start()
@@ -39,10 +41,13 @@ public class PlayerMovement : MonoBehaviour
         playerShoot = GetComponent<PlayerShoot>();
         speedvalueHolder = speed;
         coinDisplayText.text = coin.ToString();
+        chicken = FindObjectOfType<ChickenBrain>().gameObject;
+
     }
 
     void Update()
     {
+        float distancetoChicken = Vector3.Distance(chicken.transform.position, transform.position);
 
         if (enemies.Count != 0)
         {
@@ -59,14 +64,19 @@ public class PlayerMovement : MonoBehaviour
                 lookVector.y = transform.position.y;
                 Quaternion rot = Quaternion.LookRotation(lookVector);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
-
                 playerShoot.ShootingProgress(lookVector);
 
+                if (distancetoChicken <= attackRange)
+                {
+                    chicken.GetComponent<ChickenBrain>().running = true;
+                    Debug.Log("Run Chickens!");
+                }
                 //Debug.Log("Attack!");
             }
             else
             {
                 SmoothlyTurnBacktoDefaultRotation();
+
             }
 
         }
@@ -76,7 +86,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
-
+        if (distancetoChicken > attackRange)
+        {
+            chicken.GetComponent<ChickenBrain>().running = false;
+            //Debug.Log("Relax Chicken");
+        }
         MoveWithController();
         MoveWithKeyboard();
         //IsVisibleOnScreen(energy);
