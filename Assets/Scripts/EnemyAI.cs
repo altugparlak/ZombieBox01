@@ -23,6 +23,8 @@ public class EnemyAI : MonoBehaviour
     NavMeshAgent navMeshAgent;
     EnemySpawner enemySpawner;
     GameSession gameSession;
+    SoundEffects soundEffects;
+    
 
     private List<int> randomList = new List<int>();
     private List<int> shuffled;
@@ -39,6 +41,7 @@ public class EnemyAI : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         enemySpawner = FindObjectOfType<EnemySpawner>();
         gameSession = FindObjectOfType<GameSession>();
+        soundEffects = FindObjectOfType<SoundEffects>();
         playerMovement.AddEnemy(this.gameObject.transform);
 
         ShuffleList();
@@ -111,6 +114,7 @@ public class EnemyAI : MonoBehaviour
 
     public void Hit( )
     {
+        soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieAttackSound);
         playerMovement.GetComponent<PlayerHealth>().losePlayerHealth(100);
         hitCheck = true;
         GameObject hitEffect = Instantiate(hitVFX, target.position, Quaternion.identity);

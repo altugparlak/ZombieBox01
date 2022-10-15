@@ -16,6 +16,11 @@ public class PlayerShoot : MonoBehaviour
 
     [Header("Others")]
     [SerializeField] private bool dualShot;
+    [SerializeField] AudioClip laserShootingSound;
+    [SerializeField] AudioClip machineGunSound;
+    public AudioSource audioSource;
+
+
     PlayerMovement playerMovement;
 
     private bool canShoot = true;
@@ -25,12 +30,14 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        audioSource = GetComponent<AudioSource>();
         projectile = projectiles[projectileIndex];
     }
     public void ShootingProgress(Vector3 lookvector)
     {
         if (canShoot)
         {
+            audioSource.PlayOneShot(machineGunSound);
             if (dualShot)
             {
                 DualFire(lookvector);
