@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zdc: 0.7
   zombieAttackSound: {fileID: 8300000, guid: 90054576c036ea44096d20cc89ff4da2, type: 3}
+  zombieDeathSound: {fileID: 8300000, guid: 4fb45f9472f5e554c82a5a9c7ba4c739, type: 3}
   name: Standard
   health: 200
   movementSpeed: 3.5

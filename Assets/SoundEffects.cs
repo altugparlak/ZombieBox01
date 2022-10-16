@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class SoundEffects : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private AudioClip clickSound0;
+    [SerializeField] private AudioClip clickSound1;
+
+    AudioSource audioSource;
+
+    private void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayClickSound0()
     {
-        
+        audioSource.PlayOneShot(clickSound0);
+    }
+
+    public void PlayClickSound1()
+    {
+        audioSource.PlayOneShot(clickSound1);
     }
 }
