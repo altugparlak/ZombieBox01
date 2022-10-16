@@ -95,21 +95,23 @@ public class EnemySpawner : MonoBehaviour
         timeBetweenSpawns = gameSession.waveSpawningSpeed;
 
         int wave = gameSession.waveIndex - 1;
-        int waveAmount = waves[wave].totalNumberOfZombies;
-        numberOfEnemiesForTheWave = waveAmount;
-        Debug.Log("Wave number: " + (wave + 1));
-        Debug.Log("Wave Amount: " + waveAmount);
+        int waveAmount;
 
         if (wave > 10)
         {
-            choosenWave = waves[waves.Count];
+            waveAmount = waves[waves.Count].totalNumberOfZombies;
+            choosenWave = waves[waves.Count]; //Son Random Wave
             WaveRandomOperator(choosenWave);
         }
         else
         {
+            waveAmount = waves[wave].totalNumberOfZombies;
             choosenWave = waves[wave];
             WaveRandomOperator(choosenWave);
         }
+        numberOfEnemiesForTheWave = waveAmount;
+        Debug.Log("Wave number: " + (wave + 1));
+        Debug.Log("Wave Amount: " + waveAmount);
         StartTheNextWave();
 
     }
