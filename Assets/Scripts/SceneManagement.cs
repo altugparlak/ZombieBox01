@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
-    [SerializeField] private AudioClip clickSound0;
-    [SerializeField] private AudioClip clickSound1;
 
 
     private float StartSceneLoadDelay = 1f;
-    private float LevelLoadDelay = 1f;
+    private float LevelLoadDelay = 0.5f;
     private float LevelRestartDelay = 1f;
 
     private int currentSceneIndex;
