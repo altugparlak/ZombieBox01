@@ -9,6 +9,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Text energyText;
     [SerializeField] private Text waveText;
+    [SerializeField] private Text waveText2;
     [SerializeField] private List<GameObject> UIList = new List<GameObject>();
     [SerializeField] private GameObject gameEndWindow;
 
@@ -62,6 +63,8 @@ public class GameSession : MonoBehaviour
         waveIndex++;
         //healthIncrementforZombies = (waveIndex - 1) * 100;
         waveText.text = $"Wave {waveIndex}";
+        waveText2.text = $"Wave {waveIndex}";
+
         //waveAmount += waveAmountIncreament;
         enemySpawner.SetTheWave();
         Invoke("SplashWaveImageShowUp", 2f);
