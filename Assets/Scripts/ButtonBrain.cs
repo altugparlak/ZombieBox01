@@ -7,11 +7,10 @@ public class ButtonBrain : MonoBehaviour
 {
     [SerializeField] private Text remainingSeconds;
     [SerializeField] private Image transparentImage;
-
+    [SerializeField] private float timeRemaining = 3.5f;
     Button button;
     RectTransform rt;
     private bool buttonClicked = false;
-    private float timeRemaining = 3.5f;
 
     private float firstwidthValue;
     private float buttoncooldown;
@@ -69,7 +68,6 @@ public class ButtonBrain : MonoBehaviour
     public void ButtonClickControl()
     {
         rt.sizeDelta = new Vector2(firstwidthValue, firstwidthValue);
-        timeRemaining = 3.5f;
         buttonClicked = true;
     }
 }

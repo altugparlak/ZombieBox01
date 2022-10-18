@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class GameSession : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private Animator animator;
+    //[SerializeField] private Animator animator;
+    [SerializeField] private Animator waveTextAnimator;
     [SerializeField] private Text energyText;
     [SerializeField] private Text waveText;
     [SerializeField] private Text waveText2;
@@ -42,7 +43,7 @@ public class GameSession : MonoBehaviour
         energyText.text = energyAmount.ToString();
         waveText.text = $"Wave {waveIndex}";
 
-        Invoke("SplashWaveImageShowUp", 2f);
+        //Invoke("SplashWaveImageShowUp", 2f);
 
     }
 
@@ -53,10 +54,10 @@ public class GameSession : MonoBehaviour
 
     }
 
-    private void SplashWaveImageShowUp()
-    {
-        animator.SetTrigger("ShowUp");
-    }
+    //private void SplashWaveImageShowUp()
+    //{
+    //    animator.SetTrigger("ShowUp");
+    //}
 
     public void SetUpTheNextWave()
     {
@@ -67,7 +68,8 @@ public class GameSession : MonoBehaviour
 
         //waveAmount += waveAmountIncreament;
         enemySpawner.SetTheWave();
-        Invoke("SplashWaveImageShowUp", 2f);
+        waveTextAnimator.SetTrigger("WaveCompleted");
+        //Invoke("SplashWaveImageShowUp", 2f);
     }
 
     public void ActivateGameEndWindow()

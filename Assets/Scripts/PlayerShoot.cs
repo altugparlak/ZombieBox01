@@ -106,6 +106,15 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    public void DualWeaponActivationProgress()
+    {
+        dualShot = true;
+        StartCoroutine(DualWeaponDelay(5f));
+    }
 
-
+    private IEnumerator DualWeaponDelay(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        dualShot = false;
+    }
 }
