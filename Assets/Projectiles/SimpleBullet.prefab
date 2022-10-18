@@ -5010,6 +5010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d67a9d4404074da1b470d38a58a6d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileDamege: 40
   speed: 10
   hit: {fileID: 1096352044232144, guid: 6e4b9c1925f0d3f4d8446e551a2e20d3, type: 3}
   flash: {fileID: 1069073989498846, guid: 7658ae01d0a0655468898c47617f4de6, type: 3}

@@ -23,13 +23,20 @@ public class ChickenBrain : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         navMeshAgentChicken = GetComponent<NavMeshAgent>();
-        playerTransform = FindObjectOfType<PlayerMovement>().transform;
+
+        PlayerMovement playerMovementCheck = FindObjectOfType<PlayerMovement>();
+        if (playerMovementCheck)
+            playerTransform = playerMovementCheck.transform;
+        else
+        {
+            Debug.Log("No Player is Found!");
+        }
     }
 
     [System.Obsolete]
     void Update()
     {
-        if (running)
+        if (running && playerTransform)
         {
             Vector3 runningPosition = (transform.position - playerTransform.position) + transform.position;
             navMeshAgentChicken.speed = 6;

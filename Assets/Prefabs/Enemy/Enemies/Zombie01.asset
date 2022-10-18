@@ -19,5 +19,5 @@ MonoBehaviour:
   health: 200
   movementSpeed: 3.5
   attackSpeed: 1
-  attackDamage: 0
+  attackDamage: 100
   smartAttack: 0

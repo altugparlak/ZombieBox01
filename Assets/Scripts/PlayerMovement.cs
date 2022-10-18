@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController characterController;
     public Transform target;
 
-
+    public bool notDeath = true;
     private float angleHolder;
     private float speedvalueHolder;
     private int coin = 100;
@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         speedvalueHolder = speed;
         coinDisplayText.text = coin.ToString();
         chicken = FindObjectOfType<ChickenBrain>().gameObject;
+        notDeath = true;
 
     }
 
@@ -69,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
                 if (distancetoChicken <= attackRange)
                 {
                     chicken.GetComponent<ChickenBrain>().running = true;
-                    Debug.Log("Run Chickens!");
+                    //Debug.Log("Run Chickens!");
                 }
                 //Debug.Log("Attack!");
             }
@@ -91,8 +92,14 @@ public class PlayerMovement : MonoBehaviour
             chicken.GetComponent<ChickenBrain>().running = false;
             //Debug.Log("Relax Chicken");
         }
-        MoveWithController();
-        MoveWithKeyboard();
+
+        if (notDeath)
+        {
+            MoveWithController();
+            MoveWithKeyboard();
+        }
+
+
         //IsVisibleOnScreen(energy);
         if (speedBoostActivated)
         {

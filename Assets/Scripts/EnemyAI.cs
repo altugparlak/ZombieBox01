@@ -37,12 +37,20 @@ public class EnemyAI : MonoBehaviour
         // Burada findOnject yapmamak lazım çünkü her zombie find ederse sıkıntı olabilir
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        target = FindObjectOfType<PlayerMovement>().transform;
-        playerMovement = FindObjectOfType<PlayerMovement>();
+
+        PlayerMovement playerMovementCheck = FindObjectOfType<PlayerMovement>();
+        if (playerMovementCheck)
+        {
+            target = playerMovementCheck.transform;
+            playerMovement = playerMovementCheck;
+            playerMovement.AddEnemy(this.gameObject.transform);
+        }
+        else
+            Debug.Log("No Player is Found");
+
         enemySpawner = FindObjectOfType<EnemySpawner>();
         gameSession = FindObjectOfType<GameSession>();
         soundEffects = FindObjectOfType<SoundEffects>();
-        playerMovement.AddEnemy(this.gameObject.transform);
 
         ShuffleList();
         randomNumber = UnityEngine.Random.Range(0, 100);
@@ -53,56 +61,60 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (animator.GetBool("attacking") == false)
+        if (target!= null)
         {
-            navMeshAgent.SetDestination(target.position);
-        }
-
-
-        if ((target.position - transform.position).magnitude < 2)
-        {
-            animator.SetBool("attacking", true);
-        }
-        else
-        {
-
-            if (zombie.smartAttack)
+            if (animator.GetBool("attacking") == false)
             {
-                if (hitCheck)
-                {
-                    animator.SetBool("attacking", false);
-                    hitCheck = false;
-                }
+                navMeshAgent.SetDestination(target.position);
+            }
+
+
+            if ((target.position - transform.position).magnitude < 2)
+            {
+                animator.SetBool("attacking", true);
             }
             else
             {
-                animator.SetBool("attacking", false);
 
+                if (zombie.smartAttack)
+                {
+                    if (hitCheck)
+                    {
+                        animator.SetBool("attacking", false);
+                        hitCheck = false;
+                    }
+                }
+                else
+                {
+                    animator.SetBool("attacking", false);
+
+                }
             }
-        }
 
-        if (enemyHealth <= 0)
-        {
-            if (shuffled[randomNumber] == 1)
+            if (enemyHealth <= 0)
             {
-                CoinSpawn();
+                if (shuffled[randomNumber] == 1)
+                {
+                    CoinSpawn();
+                }
+                soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieDeathSound);
+                playerMovement.RemoveEnemy(this.gameObject.transform);
+                GameObject deathVfx = deathVFXlist[0];
+                GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
+                Destroy(explotion, 1.5f);
+                Destroy(this.gameObject);
+                enemySpawner.AddDestroyedEnemies();
+
             }
-            soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieDeathSound);
-            playerMovement.RemoveEnemy(this.gameObject.transform);
-            GameObject deathVfx = deathVFXlist[0]; 
-            GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
-            Destroy(explotion, 1.5f);
-            Destroy(this.gameObject);
-            enemySpawner.AddDestroyedEnemies();
-            
         }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<ProjectileMovement>() != null)
         {
-            TakeDamage(40);
+            TakeDamage(collision.gameObject.GetComponent<ProjectileMovement>().projectileDamege);
             //Debug.Log("particle");
         }
     }
@@ -115,11 +127,15 @@ public class EnemyAI : MonoBehaviour
 
     public void Hit( )
     {
-        soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieAttackSound);
-        playerMovement.GetComponent<PlayerHealth>().losePlayerHealth(100);
-        hitCheck = true;
-        GameObject hitEffect = Instantiate(hitVFX, target.position, Quaternion.identity);
-        Destroy(hitEffect, 1.5f);
+        if (playerMovement!=null)
+        {
+            soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieAttackSound);
+            playerMovement.GetComponent<PlayerHealth>().losePlayerHealth(zombie.attackDamage);
+            hitCheck = true;
+            GameObject hitEffect = Instantiate(hitVFX, target.position, Quaternion.identity);
+            Destroy(hitEffect, 1.5f);
+        }
+
     }
 
     private void EnemyHealthSetUpForTheWave()

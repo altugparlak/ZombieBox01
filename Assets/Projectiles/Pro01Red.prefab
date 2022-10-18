@@ -9858,6 +9858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d67a9d4404074da1b470d38a58a6d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileDamege: 40
   speed: 10
   hit: {fileID: 1854899779442152, guid: 5848d6535d700e348932df2c9eeefaf0, type: 3}
   flash: {fileID: 1803109616567170, guid: 7ed96e7cdfb30cb4f87fa9c623b4110c, type: 3}

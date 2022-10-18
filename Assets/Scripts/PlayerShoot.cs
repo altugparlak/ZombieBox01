@@ -23,6 +23,7 @@ public class PlayerShoot : MonoBehaviour
 
     PlayerMovement playerMovement;
 
+    public bool notDeath1 = true;
     private bool canShoot = true;
     private int projectileIndex = 0;
     public float shootingWaitTime = 1.5f;
@@ -32,10 +33,11 @@ public class PlayerShoot : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         audioSource = GetComponent<AudioSource>();
         projectile = projectiles[projectileIndex];
+        notDeath1 = true;
     }
     public void ShootingProgress(Vector3 lookvector)
     {
-        if (canShoot)
+        if (canShoot && notDeath1)
         {
             audioSource.PlayOneShot(machineGunSound);
             if (dualShot)

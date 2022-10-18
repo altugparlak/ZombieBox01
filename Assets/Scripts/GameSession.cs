@@ -9,6 +9,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Text energyText;
     [SerializeField] private Text waveText;
+    [SerializeField] private List<GameObject> UIList = new List<GameObject>();
+    [SerializeField] private GameObject gameEndWindow;
 
     [Header("Wave Specs")]
     //[SerializeField] public int waveAmount = 20;
@@ -33,7 +35,7 @@ public class GameSession : MonoBehaviour
     void Start()
     {
         enemySpawner = FindObjectOfType<EnemySpawner>();
-
+        gameEndWindow.SetActive(false);
         //healthIncrementforZombies = (waveIndex-1) * 100;
         energyAmount = 100;
         energyText.text = energyAmount.ToString();
@@ -63,6 +65,16 @@ public class GameSession : MonoBehaviour
         //waveAmount += waveAmountIncreament;
         enemySpawner.SetTheWave();
         Invoke("SplashWaveImageShowUp", 2f);
+    }
+
+    public void ActivateGameEndWindow()
+    {
+        foreach (var item in UIList)
+        {
+            item.SetActive(false);
+        }
+
+        gameEndWindow.SetActive(true);
     }
 
 
