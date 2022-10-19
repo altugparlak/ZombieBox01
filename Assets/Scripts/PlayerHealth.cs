@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private Slider healthbar;
-
+    [SerializeField] private GameObject fireExplosion;
     GameSession gameSession;
 
-    private int playerHealth;
+    public int playerHealth;
     void Start()
     {
         gameSession = FindObjectOfType<GameSession>();
@@ -34,6 +34,8 @@ public class PlayerHealth : MonoBehaviour
             this.gameObject.GetComponent<PlayerMovement>().notDeath = false;
             this.gameObject.GetComponent<PlayerShoot>().notDeath1 = false;
             gameSession.ActivateGameEndWindow();
+            GameObject deathVFX = Instantiate(fireExplosion, transform.position, Quaternion.identity);
+            Destroy(deathVFX, 4f);
             //Destroy(this.gameObject);
         }
     }
@@ -43,4 +45,5 @@ public class PlayerHealth : MonoBehaviour
         playerHealth += value0;
         healthbar.value = ((float)playerHealth / (float)1000);
     }
+
 }

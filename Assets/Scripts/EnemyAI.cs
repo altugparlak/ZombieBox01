@@ -130,7 +130,10 @@ public class EnemyAI : MonoBehaviour
         if (playerMovement!=null)
         {
             soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieAttackSound);
-            playerMovement.GetComponent<PlayerHealth>().losePlayerHealth(zombie.attackDamage);
+
+            PlayerHealth playerHealth = playerMovement.GetComponent<PlayerHealth>();
+            if (playerHealth.playerHealth > 0)
+                playerHealth.losePlayerHealth(zombie.attackDamage);
             hitCheck = true;
             GameObject hitEffect = Instantiate(hitVFX, target.position, Quaternion.identity);
             Destroy(hitEffect, 1.5f);
