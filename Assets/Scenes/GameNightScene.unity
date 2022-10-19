@@ -32838,6 +32838,11 @@ PrefabInstance:
       propertyPath: splashWaveImage
       value: 
       objectReference: {fileID: 140490262}
+    - target: {fileID: 5275570813057777747, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: deathExplosionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0a83e1a6b78b847acb11c4a8576d9e8e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6faac53f6287403e91fe81ad1057375, type: 3}
 --- !u!222 &5914276805380512905
@@ -33208,7 +33213,7 @@ PrefabInstance:
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}

@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private Slider healthbar;
     [SerializeField] private GameObject fireExplosion;
+    [SerializeField] private AudioClip deathExplosionSound;
     GameSession gameSession;
 
     public int playerHealth;
@@ -34,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
             this.gameObject.GetComponent<PlayerMovement>().notDeath = false;
             this.gameObject.GetComponent<PlayerShoot>().notDeath1 = false;
             gameSession.ActivateGameEndWindow();
+            this.gameObject.GetComponent<AudioSource>().PlayOneShot(deathExplosionSound);
             GameObject deathVFX = Instantiate(fireExplosion, transform.position, Quaternion.identity);
             Destroy(deathVFX, 4f);
             //Destroy(this.gameObject);
