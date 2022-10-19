@@ -32696,6 +32696,11 @@ PrefabInstance:
       objectReference: {fileID: 124202870}
     - target: {fileID: 482871505436874728, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
+      propertyPath: rotationSpeed
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 482871505436874728, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
       propertyPath: enemyIndicator
       value: 
       objectReference: {fileID: 1319069679}

@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player")]
     [SerializeField] float speed = 1f;
     [SerializeField] float attackRange = 5f;
+    [SerializeField] float rotationSpeed = 1f;
 
     [Header("Others")]
     [SerializeField] private GameObject enemyIndicator;
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform target;
 
     public bool notDeath = true;
+    private bool shooting = false;
     private float angleHolder;
     private float speedvalueHolder;
     private int coin = 100;
@@ -66,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
                 Quaternion rot = Quaternion.LookRotation(lookVector);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
                 playerShoot.ShootingProgress(lookVector);
-
+                shooting = true;
                 if (distancetoChicken <= attackRange)
                 {
                     chicken.GetComponent<ChickenBrain>().running = true;
@@ -76,14 +78,15 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                SmoothlyTurnBacktoDefaultRotation();
-
+                //SmoothlyTurnBacktoDefaultRotation();
+                shooting = false;
             }
 
         }
         else
         {
-            SmoothlyTurnBacktoDefaultRotation();
+            //SmoothlyTurnBacktoDefaultRotation();
+            shooting = false;
         }
 
         transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
@@ -112,12 +115,16 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
-
-        Vector3 direction = new Vector3(moveHorizontal, 0f, moveVertical).normalized;
+        Vector3 direction = new Vector3(moveHorizontal, 0f, moveVertical);
 
         if (direction.magnitude >= 0.1f)
         {
-            characterController.Move(direction * speed * Time.deltaTime);
+            characterController.Move(direction.normalized * speed * Time.deltaTime);
+            if (!shooting)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
+            }
         }
     }
 
@@ -125,13 +132,22 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveHorizontal = joystick.Horizontal;
         float moveVertical = joystick.Vertical;
-        Vector3 direction = new Vector3(moveHorizontal,0f,moveVertical).normalized;
-
+        Vector3 direction = new Vector3(moveHorizontal,0f,moveVertical);
+        
         if (direction.magnitude >= 0.1f)
         {
-            characterController.Move(direction * speed * Time.deltaTime);
+            characterController.Move(direction.normalized * speed * Time.deltaTime);
+            if (!shooting)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
+            }
+
         }
+        
+
     }
+
 
     void OnDrawGizmosSelected()
     {
