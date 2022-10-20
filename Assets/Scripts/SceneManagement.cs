@@ -10,7 +10,7 @@ public class SceneManagement : MonoBehaviour
     [SerializeField] private ParticleSystem baths;
 
     private float StartSceneLoadDelay = 1f;
-    private float LevelLoadDelay = 3f;
+    private float LevelLoadDelay = 1.7f;
     private float LevelRestartDelay = 1f;
 
     private int currentSceneIndex;

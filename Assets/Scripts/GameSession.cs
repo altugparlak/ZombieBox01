@@ -19,10 +19,11 @@ public class GameSession : MonoBehaviour
     //[SerializeField] public int waveAmountIncreament = 10;
     [Tooltip("Lower the number, faster the speed")]
     [SerializeField] public float waveSpawningSpeed = 3f;
+    [SerializeField] public int waveAmountIncrement = 10;
 
     [Header("Enemy Specs")]
     [SerializeField] public int healthIncrementforZombies = 0;
-
+    [SerializeField] public int damageIncrementforZombies = 0;
 
     EnemySpawner enemySpawner;
 

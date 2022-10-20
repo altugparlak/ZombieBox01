@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private GameObject hitVFX;
     [SerializeField] private GameObject coin;
     private int enemyHealth;
+    private int enemyDamage;
     private Transform target;
     private PlayerMovement playerMovement;
     private Animator animator;
@@ -55,7 +56,7 @@ public class EnemyAI : MonoBehaviour
         randomNumber = UnityEngine.Random.Range(0, 100);
 
         navMeshAgent.speed = zombie.movementSpeed;
-        EnemyHealthSetUpForTheWave();
+        EnemyStatsSetUp();
     }
 
     void Update()
@@ -132,7 +133,7 @@ public class EnemyAI : MonoBehaviour
 
             PlayerHealth playerHealth = playerMovement.GetComponent<PlayerHealth>();
             if (playerHealth.playerHealth > 0)
-                playerHealth.losePlayerHealth(zombie.attackDamage);
+                playerHealth.losePlayerHealth(enemyDamage);
             hitCheck = true;
             GameObject hitEffect = Instantiate(hitVFX, target.position, Quaternion.identity);
             Destroy(hitEffect, 1.5f);
@@ -140,12 +141,13 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    private void EnemyHealthSetUpForTheWave()
+    private void EnemyStatsSetUp()
     {
-        int waveHealthIncrement = gameSession.healthIncrementforZombies;
-        enemyHealth = zombie.health + waveHealthIncrement;
+        int enemyHealthIncrement = gameSession.healthIncrementforZombies;
+        enemyHealth = zombie.health + enemyHealthIncrement;
 
-        
+        int enemyDamageIncrement = gameSession.damageIncrementforZombies;
+        enemyDamage = zombie.attackDamage + enemyDamageIncrement;
     }
 
     private void ShuffleList()

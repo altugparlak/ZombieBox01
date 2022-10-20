@@ -7,6 +7,9 @@ public class ButtonBrain : MonoBehaviour
 {
     [SerializeField] private Text remainingSeconds;
     [SerializeField] private Image transparentImage;
+    [SerializeField] private GameObject loadingRedImage0;
+    [SerializeField] private GameObject loadingRedImage1;
+    [SerializeField] private float rotateSpeed = 1f;
     [SerializeField] private float timeRemaining = 3.5f;
     Button button;
     RectTransform rt;
@@ -30,11 +33,13 @@ public class ButtonBrain : MonoBehaviour
 
     void Update()
     {
+
         if (buttonClicked)
         {
             transparentImage.enabled = true;
             remainingSeconds.enabled = true;
             slowlyDissapearTransparent();
+            ButtonLoading();
             ButtonCooldownCountdown();
         }
     }
@@ -56,11 +61,15 @@ public class ButtonBrain : MonoBehaviour
         }
         else
         {
-            timeRemaining = 0;
+            this.gameObject.GetComponent<Image>().enabled = true;
+            loadingRedImage0.SetActive(false);
+            loadingRedImage1.SetActive(false);
             remainingSeconds.enabled = false;
             transparentImage.enabled = false;
             button.enabled = true;
             buttonClicked = false;
+            timeRemaining = 3.5f;
+
         }
 
     }
@@ -69,5 +78,14 @@ public class ButtonBrain : MonoBehaviour
     {
         rt.sizeDelta = new Vector2(firstwidthValue, firstwidthValue);
         buttonClicked = true;
+    }
+
+    private void ButtonLoading()
+    {
+        this.gameObject.GetComponent<Image>().enabled = false;
+        loadingRedImage0.SetActive(true);
+        loadingRedImage1.SetActive(true);
+        loadingRedImage0.transform.Rotate(0, 0, -6.0f * rotateSpeed * Time.deltaTime);
+        loadingRedImage1.transform.Rotate(0, 0, 6.0f * rotateSpeed * Time.deltaTime);
     }
 }
