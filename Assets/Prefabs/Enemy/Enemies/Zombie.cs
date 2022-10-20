@@ -9,6 +9,7 @@ public class Zombie : ScriptableObject
     [SerializeField] public float zdc; // This value provides how many times you wanna see this zombie on a level
     [SerializeField] public AudioClip zombieAttackSound;
     [SerializeField] public AudioClip zombieDeathSound;
+    [SerializeField] public GameObject zombieDeathVFX;
     public new string name;
     public int health;
     public float movementSpeed;

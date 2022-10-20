@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 public class SceneManagement : MonoBehaviour
 {
-
+    [SerializeField] private Image transparentImage;
+    [SerializeField] private ParticleSystem baths;
 
     private float StartSceneLoadDelay = 1f;
-    private float LevelLoadDelay = 0.5f;
+    private float LevelLoadDelay = 3f;
     private float LevelRestartDelay = 1f;
 
     private int currentSceneIndex;
 
+    private float tp = 0;
 
     private void Start()
     {
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
     }
 
     public void LoadNextScene()
@@ -40,6 +41,9 @@ public class SceneManagement : MonoBehaviour
 
     IEnumerator LoadNextLevel()
     {
+        baths.Play();
+
+        StartCoroutine(ChangeColor());
         yield return new WaitForSecondsRealtime(LevelLoadDelay);
         Time.timeScale = 1f;
 
@@ -88,4 +92,21 @@ public class SceneManagement : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+
+    private IEnumerator ChangeColor()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (float f = 0f; f <= 255; f += 0.03f)
+        {
+            yield return new WaitForSeconds(0.02f);
+            transparentImage.color = new Color(0, 0, 0, f);
+        }
+        yield return null;
+
+
+    }
+
 }

@@ -11,7 +11,6 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField] public Zombie zombie;
-    [SerializeField] private List<GameObject> deathVFXlist;
     [SerializeField] private GameObject hitVFX;
     [SerializeField] private GameObject coin;
     private int enemyHealth;
@@ -99,7 +98,7 @@ public class EnemyAI : MonoBehaviour
                 }
                 soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieDeathSound);
                 playerMovement.RemoveEnemy(this.gameObject.transform);
-                GameObject deathVfx = deathVFXlist[0];
+                GameObject deathVfx = zombie.zombieDeathVFX;
                 GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
                 Destroy(explotion, 1.5f);
                 Destroy(this.gameObject);
