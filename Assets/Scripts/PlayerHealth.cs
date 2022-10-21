@@ -9,12 +9,13 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject fireExplosion;
     [SerializeField] private AudioClip deathExplosionSound;
     GameSession gameSession;
+    Animator animator;
 
     public int playerHealth;
     void Start()
     {
         gameSession = FindObjectOfType<GameSession>();
-
+        animator = GetComponent<Animator>();
         playerHealth = 1000;
         healthbar.value = ((float)playerHealth / (float)1000);
         
@@ -32,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
         if (playerHealth <= 0)
         {
             Debug.Log("You died!");
+            animator.SetTrigger("Death");
             this.gameObject.GetComponent<PlayerMovement>().notDeath = false;
             this.gameObject.GetComponent<PlayerShoot>().notDeath1 = false;
             gameSession.ActivateGameEndWindow();

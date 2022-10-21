@@ -65,8 +65,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 Vector3 lookVector = GetClosestEnemy(enemies).position - transform.position;
                 lookVector.y = transform.position.y;
-                Quaternion rot = Quaternion.LookRotation(lookVector);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
+                if (notDeath)
+                {
+                    Quaternion rot = Quaternion.LookRotation(lookVector);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
+                }
                 playerShoot.ShootingProgress(lookVector);
                 shooting = true;
                 if (distancetoChicken <= attackRange)
