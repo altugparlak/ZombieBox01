@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public Joystick joystick;
     public List<Transform> enemies;
     private PlayerShoot playerShoot;
+    private PlayerHealth playerHealth;
     public CharacterController characterController;
     public Transform target;
 
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     {
         enemies = new List<Transform>();
         playerShoot = GetComponent<PlayerShoot>();
+        playerHealth = GetComponent<PlayerHealth>();
         speedvalueHolder = speed;
         coinDisplayText.text = coin.ToString();
         chicken = FindObjectOfType<ChickenBrain>().gameObject;
@@ -200,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ActivateSpeedBoost()
     {
-        bool enoughEnergy = GetComponent<PlayerHealth>().gameSession.energyUsable;
+        bool enoughEnergy = playerHealth.gameSession.energyUsable;
         if (enoughEnergy)
         {
             StartCoroutine(SpeedBoost(3f));
@@ -292,9 +294,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Coin")
+        if (other.tag == "Energy")
         {
-            AddCoin(10);
+            playerHealth.gameSession.addEnergy(2);
             Destroy(other.gameObject);
         }
     }

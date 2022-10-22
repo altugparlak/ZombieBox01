@@ -22,6 +22,7 @@ public class PlayerShoot : MonoBehaviour
 
 
     PlayerMovement playerMovement;
+    PlayerHealth playerHealth;
 
     public bool notDeath1 = true;
     private bool canShoot = true;
@@ -32,6 +33,7 @@ public class PlayerShoot : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         audioSource = GetComponent<AudioSource>();
+        playerHealth = GetComponent<PlayerHealth>();
         projectile = projectiles[projectileIndex];
         notDeath1 = true;
     }
@@ -108,8 +110,13 @@ public class PlayerShoot : MonoBehaviour
 
     public void DualWeaponActivationProgress()
     {
-        dualShot = true;
-        StartCoroutine(DualWeaponDelay(5f));
+        if (playerHealth.gameSession.energyUsable)
+        {
+            dualShot = true;
+            StartCoroutine(DualWeaponDelay(5f));
+        }
+        else
+            dualShot = false;
     }
 
     private IEnumerator DualWeaponDelay(float waitTime)

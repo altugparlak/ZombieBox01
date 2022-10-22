@@ -8,11 +8,13 @@ public class GameSession : MonoBehaviour
     [Header("UI")]
     //[SerializeField] private Animator animator;
     [SerializeField] private Animator waveTextAnimator;
-    [SerializeField] private Text energyText;
     [SerializeField] private Text waveText;
     [SerializeField] private Text waveText2;
     [SerializeField] private List<GameObject> UIList = new List<GameObject>();
     [SerializeField] private GameObject gameEndWindow;
+
+    [Header("UI-EnergySticks")]
+    [SerializeField] private List<Image> energySticks = new List<Image>();
 
     [Header("Wave Specs")]
     //[SerializeField] public int waveAmount = 20;
@@ -27,6 +29,7 @@ public class GameSession : MonoBehaviour
 
     EnemySpawner enemySpawner;
 
+    private const int maxEnergyAmount = 6;
     private int energyAmount;
     public int waveIndex;
     public bool energyUsable = true;
@@ -41,22 +44,29 @@ public class GameSession : MonoBehaviour
         enemySpawner = FindObjectOfType<EnemySpawner>();
         gameEndWindow.SetActive(false);
         //healthIncrementforZombies = (waveIndex-1) * 100;
-        energyAmount = 100;
-        energyText.text = energyAmount.ToString();
+        energyAmount = maxEnergyAmount;
         waveText.text = $"Wave {waveIndex}";
 
-        //Invoke("SplashWaveImageShowUp", 2f);
+        foreach (Image stick in energySticks)
+        {
+            stick.enabled = true;
+        }
 
     }
 
     public void useEnergy(int amount)
     {
         int usableEnergy = energyAmount - amount;
+
         if (usableEnergy >= 0)
         {
             energyUsable = true;
+            for (int i = energyAmount - amount; i < energyAmount; i++)
+            {
+                energySticks[i].enabled = false;
+            }
             energyAmount -= amount;
-            energyText.text = energyAmount.ToString();
+
         }
         else
         {
@@ -66,10 +76,18 @@ public class GameSession : MonoBehaviour
 
     }
 
-    //private void SplashWaveImageShowUp()
-    //{
-    //    animator.SetTrigger("ShowUp");
-    //}
+    public void addEnergy(int amount)
+    {
+        energyAmount += amount;
+
+        if (energyAmount > maxEnergyAmount)
+            energyAmount = maxEnergyAmount;
+
+        for (int i = 0; i < energyAmount; i++)
+        {
+            energySticks[i].enabled = true;
+        }
+    }
 
     public void SetUpTheNextWave()
     {
@@ -81,7 +99,6 @@ public class GameSession : MonoBehaviour
         //waveAmount += waveAmountIncreament;
         enemySpawner.SetTheWave();
         waveTextAnimator.SetTrigger("WaveCompleted");
-        //Invoke("SplashWaveImageShowUp", 2f);
     }
 
     public void ActivateGameEndWindow()
