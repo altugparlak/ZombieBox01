@@ -200,7 +200,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void ActivateSpeedBoost()
     {
-        StartCoroutine(SpeedBoost(3f));
+        bool enoughEnergy = GetComponent<PlayerHealth>().gameSession.energyUsable;
+        if (enoughEnergy)
+        {
+            StartCoroutine(SpeedBoost(3f));
+        }
     }
 
     private IEnumerator SpeedBoost(float time)

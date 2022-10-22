@@ -13,20 +13,23 @@ public class ButtonBrain : MonoBehaviour
     [SerializeField] private float timeRemaining = 3.5f;
     Button button;
     RectTransform rt;
+    GameSession gameSession;
     private bool buttonClicked = false;
 
     private float firstwidthValue;
     private float buttoncooldown;
+    private float timeRemHolder;
 
     void Start()
     {
+        gameSession = FindObjectOfType<GameSession>();
         rt = transparentImage.GetComponent<RectTransform>();
         button = GetComponent<Button>();
 
         button.enabled = true;
         remainingSeconds.enabled = false;
         transparentImage.enabled = false;
-
+        timeRemHolder = timeRemaining;
         buttoncooldown = timeRemaining;
         firstwidthValue = rt.sizeDelta.x;
     }
@@ -68,7 +71,7 @@ public class ButtonBrain : MonoBehaviour
             transparentImage.enabled = false;
             button.enabled = true;
             buttonClicked = false;
-            timeRemaining = 3.5f;
+            timeRemaining = timeRemHolder;
 
         }
 
@@ -76,8 +79,12 @@ public class ButtonBrain : MonoBehaviour
 
     public void ButtonClickControl()
     {
-        rt.sizeDelta = new Vector2(firstwidthValue, firstwidthValue);
-        buttonClicked = true;
+        if (gameSession.energyUsable)
+        {
+            rt.sizeDelta = new Vector2(firstwidthValue, firstwidthValue);
+            buttonClicked = true;
+        }
+
     }
 
     private void ButtonLoading()

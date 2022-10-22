@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Slider healthbar;
     [SerializeField] private GameObject fireExplosion;
     [SerializeField] private AudioClip deathExplosionSound;
-    GameSession gameSession;
+    public GameSession gameSession;
     Animator animator;
 
     public int playerHealth;

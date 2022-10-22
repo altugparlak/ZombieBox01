@@ -29,6 +29,7 @@ public class GameSession : MonoBehaviour
 
     private int energyAmount;
     public int waveIndex;
+    public bool energyUsable = true;
 
     private void Awake()
     {
@@ -50,8 +51,18 @@ public class GameSession : MonoBehaviour
 
     public void useEnergy(int amount)
     {
-        energyAmount -= amount;
-        energyText.text = energyAmount.ToString();
+        int usableEnergy = energyAmount - amount;
+        if (usableEnergy >= 0)
+        {
+            energyUsable = true;
+            energyAmount -= amount;
+            energyText.text = energyAmount.ToString();
+        }
+        else
+        {
+            energyUsable = false;
+            Debug.Log("Not Enough Energy!");
+        }
 
     }
 
