@@ -33340,6 +33340,12 @@ PrefabInstance:
       propertyPath: parent
       value: 
       objectReference: {fileID: 1822448302}
+    - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: projectiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 1564468091806366, guid: 08987c81973e24e6cbe3ab68c8638879,
+        type: 3}
     - target: {fileID: 497298147694821177, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
       propertyPath: m_Name
@@ -33662,9 +33668,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 554011620}
     m_Modifications:
+    - target: {fileID: 2035730411, guid: 415d4532b31a14f76b5f006d499bfa58, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000044584
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035730411, guid: 415d4532b31a14f76b5f006d499bfa58, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035730412, guid: 415d4532b31a14f76b5f006d499bfa58, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a0a61b5b4083d4439a96c32148c4f1b6,
+        type: 3}
     - target: {fileID: 2035730412, guid: 415d4532b31a14f76b5f006d499bfa58, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027664269237278360, guid: 415d4532b31a14f76b5f006d499bfa58,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027664270904858639, guid: 415d4532b31a14f76b5f006d499bfa58,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6027664271082266817, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}

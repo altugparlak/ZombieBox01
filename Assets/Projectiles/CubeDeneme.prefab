@@ -9695,9 +9695,8 @@ GameObject:
   - component: {fileID: 108416085333391600}
   - component: {fileID: 54351105455091520}
   - component: {fileID: 135893854351048510}
-  - component: {fileID: -8170357975236337795}
   m_Layer: 7
-  m_Name: Pro02Cube
+  m_Name: CubeDeneme
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9727,8 +9726,8 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841414879310842}
   serializedVersion: 8
-  lengthInSec: 1
-  simulationSpeed: 1
+  lengthInSec: 0.2
+  simulationSpeed: 0.1
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -9802,7 +9801,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 0.2
       maxCurve:
         serializedVersion: 2
@@ -9971,7 +9970,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.25
+      scalar: 0.3
       minScalar: 0.02
       maxCurve:
         serializedVersion: 2
@@ -10721,8 +10720,8 @@ ParticleSystem:
     curve:
       serializedVersion: 2
       minMaxState: 1
-      scalar: 1
-      minScalar: 1
+      scalar: 10
+      minScalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -14503,7 +14502,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841414879310842}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 605a456cfc02f6b499a64717539a27e8, type: 3}
   m_Name: 
@@ -14680,23 +14679,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8170357975236337795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1841414879310842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d67a9d4404074da1b470d38a58a6d63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileDamege: 40
-  speed: 10
-  hit: {fileID: 1560688422115726, guid: cb85294eca648b846832694cc9d836cc, type: 3}
-  flash: {fileID: 1416074664878166, guid: 617f36d624d400a4b835a1309da53fb3, type: 3}
-  UseFirePointRotation: 0
-  rotationOffset: {x: 0, y: 0, z: 0}
-  Detached: []
-  hitOffset: 0.05
