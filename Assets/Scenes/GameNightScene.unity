@@ -30137,7 +30137,7 @@ PrefabInstance:
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SwitchWeapon
+      value: CastShockWave
       objectReference: {fileID: 0}
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
@@ -30179,6 +30179,11 @@ PrefabInstance:
         type: 3}
       propertyPath: rotateSpeed
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027664271082266822, guid: 415d4532b31a14f76b5f006d499bfa58,
+        type: 3}
+      propertyPath: timeRemaining
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 415d4532b31a14f76b5f006d499bfa58, type: 3}
@@ -33335,11 +33340,23 @@ PrefabInstance:
       propertyPath: coinDisplayText
       value: 
       objectReference: {fileID: 1333211155}
+    - target: {fileID: 482871505436874728, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: SpeedBoostEffect
+      value: 
+      objectReference: {fileID: 1564468091806366, guid: efdb070cacdf84a7f8661f2008902ca4,
+        type: 3}
     - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
       propertyPath: parent
       value: 
       objectReference: {fileID: 1822448302}
+    - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: shockWaveParticle
+      value: 
+      objectReference: {fileID: 1595252117517162, guid: c00b6ea84ba04489790dcac1d3cf5e1f,
+        type: 3}
     - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
       propertyPath: projectiles.Array.data[0]

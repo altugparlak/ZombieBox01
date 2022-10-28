@@ -6,6 +6,7 @@ public class PlayerShoot : MonoBehaviour
 {
     [Header("Projectile")]
     [SerializeField] private List<GameObject> projectiles;
+    [SerializeField] private GameObject shockWaveParticle;
     public GameObject projectile;
     public GameObject parent;
 
@@ -123,5 +124,12 @@ public class PlayerShoot : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         dualShot = false;
+    }
+
+    public void CastShockWave()
+    {
+        GameObject shockWave = Instantiate(shockWaveParticle, this.gameObject.transform.position, Quaternion.identity);
+        shockWave.transform.SetParent(this.gameObject.transform);
+
     }
 }
