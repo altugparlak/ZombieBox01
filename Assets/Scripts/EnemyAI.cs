@@ -119,6 +119,12 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        TakeDamage(1000);
+    }
+
+
     private void TakeDamage(int damage)
     {
         enemyHealth -= damage;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4819818843720310}
   - component: {fileID: 198316187487270594}
   - component: {fileID: 199901496000089600}
-  m_Layer: 7
+  m_Layer: 18
   m_Name: BorderLightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4835,7 +4835,7 @@ GameObject:
   - component: {fileID: 4472473557064494}
   - component: {fileID: 198207720701571386}
   - component: {fileID: 199629377902509242}
-  m_Layer: 7
+  m_Layer: 18
   m_Name: Darkness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9720,7 +9720,8 @@ GameObject:
   - component: {fileID: 108556751418608030}
   - component: {fileID: -1583383933509422719}
   - component: {fileID: 7720869969401066485}
-  m_Layer: 7
+  - component: {fileID: 4398988403411738468}
+  m_Layer: 18
   m_Name: Lightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13384,7 +13385,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -13453,7 +13454,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -13561,29 +13562,23 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 4096
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
-    collidesWithDynamic: 1
+    collisionMessages: 1
+    collidesWithDynamic: 0
     interiorCollisions: 0
   TriggerModule:
     enabled: 0
     serializedVersion: 2
-    inside: 1
+    inside: 0
     outside: 0
     enter: 0
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
-    primitives:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    primitives: []
   SubModule:
     serializedVersion: 2
     enabled: 0
@@ -14680,11 +14675,29 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595252117517162}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4398988403411738468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595252117517162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5551a77c1d37c40779d1aba683195a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1809088009161248
 GameObject:
   m_ObjectHideFlags: 0
@@ -14696,7 +14709,7 @@ GameObject:
   - component: {fileID: 4145045361821176}
   - component: {fileID: 198831507450239270}
   - component: {fileID: 199100726335174730}
-  m_Layer: 7
+  m_Layer: 18
   m_Name: Borders
   m_TagString: Untagged
   m_Icon: {fileID: 0}

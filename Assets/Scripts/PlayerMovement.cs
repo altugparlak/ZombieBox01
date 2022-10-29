@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
                     Quaternion rot = Quaternion.LookRotation(lookVector);
                     transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
                 }
-                playerShoot.ShootingProgress(lookVector);
+                //playerShoot.ShootingProgress(lookVector);
                 shooting = true;
                 if (distancetoChicken <= attackRange)
                 {
