@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject enemyIndicator;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Text coinDisplayText;
+    [SerializeField] private Material mymat;
+    [SerializeField] private float materialIntensity;
 
     public GameObject energy;
     public Joystick joystick;
@@ -34,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private float angleHolder;
     private float speedvalueHolder;
     private int coin = 100;
+    //private static Color defaultColor = new Color(1.528f, 0.855f, 0.353f, 1f);
 
     public GameObject chicken;
 
@@ -47,13 +50,13 @@ public class PlayerMovement : MonoBehaviour
         coinDisplayText.text = coin.ToString();
         chicken = FindObjectOfType<ChickenBrain>().gameObject;
         notDeath = true;
-
+        mymat.SetColor("_EmissionColor", new Color(0, 1, 0, 1) * materialIntensity);
+        Debug.Log(mymat.GetColor("_EmissionColor"));
     }
 
     void Update()
     {
         float distancetoChicken = Vector3.Distance(chicken.transform.position, transform.position);
-
         if (enemies.Count != 0)
         {
             //GetClosestEnemy(enemies).gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
@@ -113,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
         {
             SpeedBoostObject.transform.position = transform.position;
         }
+
+        DroneColorControl();
 
     }
 
@@ -311,6 +316,38 @@ public class PlayerMovement : MonoBehaviour
     {
         coin -= value;
         coinDisplayText.text = coin.ToString();
+    }
+
+    private void DroneColorControl()
+    {
+        int currentEnergy = playerHealth.gameSession.GetEnergyAmount(); // This value changes between 0-6
+
+        switch (currentEnergy)
+        {
+            case 0:
+                mymat.SetColor("_EmissionColor", new Color(1, 0, 0, 1) * materialIntensity);
+                break;
+            case 1:
+                mymat.SetColor("_EmissionColor", new Color(1, 0.2f, 0, 1) * materialIntensity);
+                break;
+            case 2:
+                mymat.SetColor("_EmissionColor", new Color(0.8f, 0.4f, 0, 1) * materialIntensity);
+                break;
+            case 3:
+                mymat.SetColor("_EmissionColor", new Color(0.6f, 0.6f, 0, 1) * materialIntensity);
+                break;
+            case 4:
+                mymat.SetColor("_EmissionColor", new Color(0.4f, 0.8f, 0, 1) * materialIntensity);
+                break;
+            case 5:
+                mymat.SetColor("_EmissionColor", new Color(0.2f, 1, 0, 1) * materialIntensity);
+                break;
+            case 6:
+                mymat.SetColor("_EmissionColor", new Color(0, 1, 0, 1) * materialIntensity);
+                break;
+            default:
+                break;
+        }
     }
 
 

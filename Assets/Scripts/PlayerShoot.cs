@@ -126,10 +126,15 @@ public class PlayerShoot : MonoBehaviour
         dualShot = false;
     }
 
+
     public void CastShockWave()
     {
-        GameObject shockWave = Instantiate(shockWaveParticle, this.gameObject.transform.position, Quaternion.identity);
-        shockWave.transform.SetParent(this.gameObject.transform);
+        bool enoughEnergy = playerHealth.gameSession.energyUsable;
+        if (enoughEnergy)
+        {
+            GameObject shockWave = Instantiate(shockWaveParticle, this.gameObject.transform.position, Quaternion.identity);
+            shockWave.transform.SetParent(this.gameObject.transform);
+        }
 
     }
 }

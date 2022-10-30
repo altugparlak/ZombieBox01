@@ -30157,7 +30157,7 @@ PrefabInstance:
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6027664271082266819, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
@@ -30183,7 +30183,7 @@ PrefabInstance:
     - target: {fileID: 6027664271082266822, guid: 415d4532b31a14f76b5f006d499bfa58,
         type: 3}
       propertyPath: timeRemaining
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 415d4532b31a14f76b5f006d499bfa58, type: 3}
@@ -33312,6 +33312,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 482871505436874728, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
+      propertyPath: mymat
+      value: 
+      objectReference: {fileID: 2100000, guid: f03c407413b41754792f7ba60761c927, type: 2}
+    - target: {fileID: 482871505436874728, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
       propertyPath: energy
       value: 
       objectReference: {fileID: 2014109517}
@@ -33346,6 +33351,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1564468091806366, guid: efdb070cacdf84a7f8661f2008902ca4,
         type: 3}
+    - target: {fileID: 482871505436874728, guid: d6faac53f6287403e91fe81ad1057375,
+        type: 3}
+      propertyPath: materialIntensity
+      value: 1.7
+      objectReference: {fileID: 0}
     - target: {fileID: 482871505436874729, guid: d6faac53f6287403e91fe81ad1057375,
         type: 3}
       propertyPath: parent

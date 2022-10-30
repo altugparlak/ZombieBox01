@@ -111,5 +111,10 @@ public class GameSession : MonoBehaviour
         gameEndWindow.SetActive(true);
     }
 
+    public int GetEnergyAmount()
+    {
+        return energyAmount;
+    }
+
 
 }
