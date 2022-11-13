@@ -10,6 +10,7 @@ public class Zombie : ScriptableObject
     [SerializeField] public AudioClip zombieAttackSound;
     [SerializeField] public AudioClip zombieDeathSound;
     [SerializeField] public GameObject zombieDeathVFX;
+    [SerializeField] public int zombieWorth;
     public new string name;
     public int health;
     public float movementSpeed;

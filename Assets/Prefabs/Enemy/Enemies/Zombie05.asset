@@ -16,6 +16,7 @@ MonoBehaviour:
   zombieAttackSound: {fileID: 8300000, guid: 1225b0f997026d64fa600c3fd93f1a74, type: 3}
   zombieDeathSound: {fileID: 8300000, guid: a4366158371c9514cae30cfff454dcb2, type: 3}
   zombieDeathVFX: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
+  zombieWorth: 50
   name: FatZombie
   health: 500
   movementSpeed: 1.5

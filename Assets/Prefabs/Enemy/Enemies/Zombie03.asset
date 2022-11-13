@@ -17,6 +17,7 @@ MonoBehaviour:
   zombieDeathSound: {fileID: 8300000, guid: 8b9826c915109c446be0c38d54721a2d, type: 3}
   zombieDeathVFX: {fileID: 1280141305896002, guid: e473029e4c70ad543a6879b82a732f4f,
     type: 3}
+  zombieWorth: 25
   name: Crawler
   health: 150
   movementSpeed: 3

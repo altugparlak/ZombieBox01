@@ -334,16 +334,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void AddCoin(int value)
+    public void GainMoney(int value)
     {
         playerMoney += value;
-        coinDisplayText.text = playerMoney.ToString();
+        playerMoneyTxt.text = playerMoney.ToString();
     }
 
-    public void SpendCoin(int value)
+    public void SpendMoney(int value)
     {
         playerMoney -= value;
-        coinDisplayText.text = playerMoney.ToString();
+        playerMoneyTxt.text = playerMoney.ToString();
     }
 
     private void DroneColorControl()

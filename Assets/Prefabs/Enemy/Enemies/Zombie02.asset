@@ -16,6 +16,7 @@ MonoBehaviour:
   zombieAttackSound: {fileID: 8300000, guid: 27b98a8c68f991b408c5c6afff25358c, type: 3}
   zombieDeathSound: {fileID: 8300000, guid: 4fb45f9472f5e554c82a5a9c7ba4c739, type: 3}
   zombieDeathVFX: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
+  zombieWorth: 20
   name: FastZombie
   health: 150
   movementSpeed: 5

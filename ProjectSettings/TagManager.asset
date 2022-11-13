@@ -15,6 +15,7 @@ TagManager:
   - ShockWave
   - ElectricField
   - Scare
+  - WeaponUpgrade
   layers:
   - Default
   - TransparentFX
@@ -36,7 +37,7 @@ TagManager:
   - ChickenPosition
   - Skill
   - SkillPickUp
-  - 
+  - WeaponUpgrade
   - 
   - 
   - 

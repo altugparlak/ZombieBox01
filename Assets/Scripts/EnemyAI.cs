@@ -146,6 +146,7 @@ public class EnemyAI : MonoBehaviour
         }
         soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieDeathSound);
         playerMovement.RemoveEnemy(this.gameObject.transform);
+        playerMovement.GainMoney(zombie.zombieWorth);
         GameObject deathVfx = zombie.zombieDeathVFX;
         GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
         Destroy(explotion, 1.5f);

@@ -16,6 +16,7 @@ MonoBehaviour:
   zombieAttackSound: {fileID: 8300000, guid: 24b617db03a924c4ab49c13feb18c10d, type: 3}
   zombieDeathSound: {fileID: 8300000, guid: 5cd921b91deac4f47b05c451951f7a53, type: 3}
   zombieDeathVFX: {fileID: 100006, guid: 2a474af3f4c27be4e9bdce39cfe4315d, type: 3}
+  zombieWorth: 25
   name: ToxicZombie
   health: 120
   movementSpeed: 3.5
