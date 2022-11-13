@@ -155,10 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombie: {fileID: 11400000, guid: 993072144c05f418bb3894b436bd83ff, type: 2}
-  deathVFXlist:
-  - {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
   hitVFX: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
   coin: {fileID: 9053529705934535877, guid: 5f71c6876cd644beca0475c2c62d0ac7, type: 3}
+  scaredVFX: {fileID: 100002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
   deathVFX: {fileID: 1636871764186634, guid: 9a7c6bfff5ad87d409e200fe3a0d5036, type: 3}
 --- !u!136 &5421914050864917230
 CapsuleCollider:

@@ -11,6 +11,10 @@ TagManager:
   - Coin
   - ChickenPosition
   - Chicken
+  - Skill
+  - ShockWave
+  - ElectricField
+  - Scare
   layers:
   - Default
   - TransparentFX
@@ -31,7 +35,7 @@ TagManager:
   - Chicken
   - ChickenPosition
   - Skill
-  - 
+  - SkillPickUp
   - 
   - 
   - 

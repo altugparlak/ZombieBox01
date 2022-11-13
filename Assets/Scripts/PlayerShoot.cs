@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private bool dualShot;
     [SerializeField] AudioClip laserShootingSound;
     [SerializeField] AudioClip machineGunSound;
+    [SerializeField] AudioClip electricFieldSound;
     public AudioSource audioSource;
 
 
@@ -29,6 +31,9 @@ public class PlayerShoot : MonoBehaviour
     private bool canShoot = true;
     private int projectileIndex = 0;
     public float shootingWaitTime = 1.5f;
+
+    public bool castShockWave = false;
+    public bool castElectricField = false;
 
     private void Start()
     {
@@ -127,14 +132,39 @@ public class PlayerShoot : MonoBehaviour
     }
 
 
-    public void CastShockWave()
+    public void CastSpell()
     {
         bool enoughEnergy = playerHealth.gameSession.energyUsable;
-        if (enoughEnergy)
-        {
-            GameObject shockWave = Instantiate(shockWaveParticle, this.gameObject.transform.position, Quaternion.identity);
-            shockWave.transform.SetParent(this.gameObject.transform);
-        }
 
+        if (castShockWave)
+        {
+            if (enoughEnergy)
+            {
+                GameObject shockWave = Instantiate(shockWaveParticle, this.gameObject.transform.position, Quaternion.identity);
+                shockWave.transform.SetParent(this.gameObject.transform);
+                audioSource.PlayOneShot(electricFieldSound);
+                //playerMovement.spellButton.GetComponent<Button>().interactable = false;
+                //castShockWave = false;
+            }
+        }
+        else if (castElectricField)
+        {
+            if (enoughEnergy)
+            {
+
+                castElectricField = false;
+            }
+        }
     }
+
+    //public void CastShockWave()
+    //{
+    //    bool enoughEnergy = playerHealth.gameSession.energyUsable;
+    //    if (enoughEnergy)
+    //    {
+    //        GameObject shockWave = Instantiate(shockWaveParticle, this.gameObject.transform.position, Quaternion.identity);
+    //        shockWave.transform.SetParent(this.gameObject.transform);
+    //    }
+
+    //}
 }

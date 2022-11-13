@@ -13,6 +13,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] public Zombie zombie;
     [SerializeField] private GameObject hitVFX;
     [SerializeField] private GameObject coin;
+    [SerializeField] private GameObject scaredVFX;
+    private GameObject scaredVFXx;
     private int enemyHealth;
     private int enemyDamage;
     private Transform target;
@@ -29,6 +31,7 @@ public class EnemyAI : MonoBehaviour
     private List<int> randomList = new List<int>();
     private List<int> shuffled;
     private bool hitCheck = false;
+    private bool enemyScared = false;
     int randomNumber;
 
 
@@ -63,51 +66,91 @@ public class EnemyAI : MonoBehaviour
     {
         if (target!= null)
         {
-            if (animator.GetBool("attacking") == false)
-            {
-                navMeshAgent.SetDestination(target.position);
-            }
-
-
-            if ((target.position - transform.position).magnitude < 2)
-            {
-                animator.SetBool("attacking", true);
-            }
+            if (enemyScared)
+                EnemyScaredAndRun();
             else
-            {
+                EnemyMovementAndAttack();
 
-                if (zombie.smartAttack)
-                {
-                    if (hitCheck)
-                    {
-                        animator.SetBool("attacking", false);
-                        hitCheck = false;
-                    }
-                }
-                else
-                {
-                    animator.SetBool("attacking", false);
-
-                }
-            }
 
             if (enemyHealth <= 0)
             {
-                if (shuffled[randomNumber] == 1)
-                {
-                    CoinSpawn();
-                }
-                soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieDeathSound);
-                playerMovement.RemoveEnemy(this.gameObject.transform);
-                GameObject deathVfx = zombie.zombieDeathVFX;
-                GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
-                Destroy(explotion, 1.5f);
-                Destroy(this.gameObject);
-                enemySpawner.AddDestroyedEnemies();
+                EnemyDeath();
 
             }
         }
-        
+
+    }
+
+    private void EnemyScaredAndRun()
+    {
+        Vector3 runningPosition = (transform.position - target.position) + transform.position;
+        //navMeshAgentChicken.speed = 6;
+        //animator.SetBool("Scared", true);
+        navMeshAgent.SetDestination(runningPosition);
+        var relativePos = runningPosition - transform.position;
+        var rotationVector = Quaternion.LookRotation(relativePos);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotationVector, Time.deltaTime * 10);
+    }
+
+    public void StartScaring()
+    {
+        scaredVFXx = Instantiate(scaredVFX, transform.position, Quaternion.identity);
+        scaredVFXx.transform.SetParent(this.gameObject.transform);
+        StartCoroutine(ScareTime(3f));
+    }
+
+    private IEnumerator ScareTime(float time)
+    {
+        enemyScared = true;
+        yield return new WaitForSeconds(time);
+        enemyScared = false;
+        Destroy(scaredVFXx);
+    }
+
+    private void EnemyMovementAndAttack()
+    {
+        if (animator.GetBool("attacking") == false)
+        {
+            navMeshAgent.SetDestination(target.position);
+        }
+
+
+        if ((target.position - transform.position).magnitude < 2)
+        {
+            animator.SetBool("attacking", true);
+        }
+        else
+        {
+
+            if (zombie.smartAttack)
+            {
+                if (hitCheck)
+                {
+                    animator.SetBool("attacking", false);
+                    hitCheck = false;
+                }
+            }
+            else
+            {
+                animator.SetBool("attacking", false);
+
+            }
+        }
+    }
+
+    private void EnemyDeath()
+    {
+        if (shuffled[randomNumber] == 1)
+        {
+            CoinSpawn();
+        }
+        soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieDeathSound);
+        playerMovement.RemoveEnemy(this.gameObject.transform);
+        GameObject deathVfx = zombie.zombieDeathVFX;
+        GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
+        Destroy(explotion, 1.5f);
+        Destroy(this.gameObject);
+        enemySpawner.AddDestroyedEnemies();
     }
 
     private void OnCollisionEnter(Collision collision)

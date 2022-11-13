@@ -11,6 +11,7 @@ public class ButtonBrain : MonoBehaviour
     [SerializeField] private GameObject loadingRedImage1;
     [SerializeField] private float rotateSpeed = 1f;
     [SerializeField] private float timeRemaining = 3.5f;
+
     Button button;
     RectTransform rt;
     GameSession gameSession;
@@ -19,6 +20,7 @@ public class ButtonBrain : MonoBehaviour
     private float firstwidthValue;
     private float buttoncooldown;
     private float timeRemHolder;
+    
 
     void Start()
     {
@@ -95,4 +97,6 @@ public class ButtonBrain : MonoBehaviour
         loadingRedImage0.transform.Rotate(0, 0, -6.0f * rotateSpeed * Time.deltaTime);
         loadingRedImage1.transform.Rotate(0, 0, 6.0f * rotateSpeed * Time.deltaTime);
     }
+
+    
 }

@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Text coinDisplayText;
     [SerializeField] private Material mymat;
     [SerializeField] private float materialIntensity;
+    [SerializeField] private GameObject skillPickUpEffect;
+    [SerializeField] public GameObject spellButton;
 
     public GameObject energy;
     public Joystick joystick;
@@ -51,7 +53,8 @@ public class PlayerMovement : MonoBehaviour
         chicken = FindObjectOfType<ChickenBrain>().gameObject;
         notDeath = true;
         mymat.SetColor("_EmissionColor", new Color(0, 1, 0, 1) * materialIntensity);
-        Debug.Log(mymat.GetColor("_EmissionColor"));
+        spellButton.GetComponent<Button>().interactable = false;
+        //Debug.Log(mymat.GetColor("_EmissionColor"));
     }
 
     void Update()
@@ -297,11 +300,29 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotQ, Time.deltaTime * 5);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) // Skill PickUp
     {
         if (other.tag == "Energy")
         {
             playerHealth.gameSession.addEnergy(2);
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "ElectricField")
+        {
+            playerShoot.castShockWave = true;
+            spellButton.GetComponent<Button>().interactable = true;
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "Scare")
+        {
+            Debug.Log("Scare");
+            foreach (Transform enemy in enemies)
+            {
+                enemy.GetComponent<EnemyAI>().StartScaring();
+            }
+            spellButton.GetComponent<Button>().interactable = true;
             Destroy(other.gameObject);
         }
     }

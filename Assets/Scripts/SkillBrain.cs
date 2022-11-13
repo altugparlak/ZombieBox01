@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SkillBrain : MonoBehaviour
 {
+    //ShockWaveBrain
     [SerializeField] private AnimationCurve curve;
     SphereCollider thisCollider;
     private float colliderRadius = 0f;
     private float speed = 0f;
-
     private bool startGrowing = false;
     void Start()
     {
