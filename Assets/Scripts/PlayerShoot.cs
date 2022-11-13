@@ -8,6 +8,8 @@ public class PlayerShoot : MonoBehaviour
     [Header("Projectile")]
     [SerializeField] private List<GameObject> projectiles;
     [SerializeField] private GameObject shockWaveParticle;
+    [SerializeField] private GameObject lightBumb;
+
     public GameObject projectile;
     public GameObject parent;
 
@@ -33,7 +35,7 @@ public class PlayerShoot : MonoBehaviour
     public float shootingWaitTime = 1.5f;
 
     public bool castShockWave = false;
-    public bool castElectricField = false;
+    public bool castEnemyFear = false;
 
     private void Start()
     {
@@ -147,12 +149,15 @@ public class PlayerShoot : MonoBehaviour
                 //castShockWave = false;
             }
         }
-        else if (castElectricField)
+        else if (castEnemyFear)
         {
             if (enoughEnergy)
             {
-
-                castElectricField = false;
+                foreach (Transform enemy in playerMovement.enemies)
+                {
+                    enemy.GetComponent<EnemyAI>().StartScaring();
+                }
+                castEnemyFear = false;
             }
         }
     }
@@ -167,4 +172,5 @@ public class PlayerShoot : MonoBehaviour
     //    }
 
     //}
+
 }

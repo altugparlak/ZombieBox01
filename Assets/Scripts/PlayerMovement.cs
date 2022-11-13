@@ -15,11 +15,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] float attackRange = 5f;
     [SerializeField] float rotationSpeed = 1f;
+    [SerializeField] private Text playerMoneyTxt;
+    private int playerMoney;
+
+    [Header("SkillImages")]
+    [SerializeField] private Image electricField;
+    [SerializeField] private Image skullFear;
 
     [Header("Others")]
     [SerializeField] private GameObject enemyIndicator;
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private Text coinDisplayText;
     [SerializeField] private Material mymat;
     [SerializeField] private float materialIntensity;
     [SerializeField] private GameObject skillPickUpEffect;
@@ -37,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
     private bool shooting = false;
     private float angleHolder;
     private float speedvalueHolder;
-    private int coin = 100;
     //private static Color defaultColor = new Color(1.528f, 0.855f, 0.353f, 1f);
 
     public GameObject chicken;
@@ -49,7 +53,8 @@ public class PlayerMovement : MonoBehaviour
         playerShoot = GetComponent<PlayerShoot>();
         playerHealth = GetComponent<PlayerHealth>();
         speedvalueHolder = speed;
-        coinDisplayText.text = coin.ToString();
+        playerMoney = 0;
+        playerMoneyTxt.text = playerMoney.ToString();
         chicken = FindObjectOfType<ChickenBrain>().gameObject;
         notDeath = true;
         mymat.SetColor("_EmissionColor", new Color(0, 1, 0, 1) * materialIntensity);
@@ -310,33 +315,35 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.tag == "ElectricField")
         {
+            ShowElectricFieldImage();
             playerShoot.castShockWave = true;
+            playerShoot.castEnemyFear = false;
+
             spellButton.GetComponent<Button>().interactable = true;
-            Destroy(other.gameObject);
+            Destroy(other.gameObject.GetComponentInParent<Transform>().gameObject);
         }
 
         if (other.tag == "Scare")
         {
-            Debug.Log("Scare");
-            foreach (Transform enemy in enemies)
-            {
-                enemy.GetComponent<EnemyAI>().StartScaring();
-            }
+            ShowSkullFearImage();
+            playerShoot.castEnemyFear = true;
+            playerShoot.castShockWave = false;
+
             spellButton.GetComponent<Button>().interactable = true;
-            Destroy(other.gameObject);
+            Destroy(other.gameObject.GetComponentInParent<Transform>().gameObject);
         }
     }
 
     public void AddCoin(int value)
     {
-        coin += value;
-        coinDisplayText.text = coin.ToString();
+        playerMoney += value;
+        coinDisplayText.text = playerMoney.ToString();
     }
 
     public void SpendCoin(int value)
     {
-        coin -= value;
-        coinDisplayText.text = coin.ToString();
+        playerMoney -= value;
+        coinDisplayText.text = playerMoney.ToString();
     }
 
     private void DroneColorControl()
@@ -369,6 +376,18 @@ public class PlayerMovement : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private void ShowSkullFearImage()
+    {
+        skullFear.enabled = true;
+        electricField.enabled = false;
+    }
+
+    private void ShowElectricFieldImage()
+    {
+        skullFear.enabled = false;
+        electricField.enabled = true;
     }
 
 

@@ -98,5 +98,5 @@ public class ButtonBrain : MonoBehaviour
         loadingRedImage1.transform.Rotate(0, 0, 6.0f * rotateSpeed * Time.deltaTime);
     }
 
-    
+
 }
