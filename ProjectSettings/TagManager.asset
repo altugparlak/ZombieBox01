@@ -16,6 +16,7 @@ TagManager:
   - ElectricField
   - Scare
   - WeaponUpgrade
+  - RandomSkill
   layers:
   - Default
   - TransparentFX

@@ -12,7 +12,6 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] public Zombie zombie;
     [SerializeField] private GameObject hitVFX;
-    [SerializeField] private GameObject coin;
     [SerializeField] private GameObject scaredVFX;
     private GameObject scaredVFXx;
     private int enemyHealth;
@@ -142,11 +141,11 @@ public class EnemyAI : MonoBehaviour
     {
         if (shuffled[randomNumber] == 1)
         {
-            CoinSpawn();
+            energySpawn();
         }
         soundEffects.GetComponent<AudioSource>().PlayOneShot(zombie.zombieDeathSound);
         playerMovement.RemoveEnemy(this.gameObject.transform);
-        playerMovement.GainMoney(zombie.zombieWorth);
+        gameSession.GainMoney(zombie.zombieWorth);
         GameObject deathVfx = zombie.zombieDeathVFX;
         GameObject explotion = Instantiate(deathVfx, transform.position, Quaternion.identity);
         Destroy(explotion, 1.5f);
@@ -210,17 +209,18 @@ public class EnemyAI : MonoBehaviour
         {
             randomList.Add(1);
         }
-        //ilk element ağır mermi ikincisi hafif mermi, bunları yeni bir liste oluşturup karıştırdık.
+        //zombieden %10luk oranda energy dusuyor
         shuffled = randomList.OrderBy(x => Guid.NewGuid()).ToList();
 
     }
 
-    private void CoinSpawn()
+    private void energySpawn()
     {
         Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z);
         //offset
-        Instantiate(coin, spawnPosition, Quaternion.identity);
-        coin.transform.eulerAngles = new Vector3(90f, 0f, 0f);
+        GameObject energyPrefab = gameSession.energy;
+        Instantiate(energyPrefab, spawnPosition, Quaternion.identity);
+        energyPrefab.transform.eulerAngles = new Vector3(90f, 0f, 0f);
 
     }
 

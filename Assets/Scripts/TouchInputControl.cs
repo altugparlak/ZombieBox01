@@ -5,10 +5,13 @@ using UnityEngine;
 public class TouchInputControl : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
+
+    GameSession gameSession;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameSession = FindObjectOfType<GameSession>();
     }
 
     // Update is called once per frame
@@ -29,6 +32,15 @@ public class TouchInputControl : MonoBehaviour
                     if (hit.transform.gameObject.tag == "WeaponUpgrade")
                     {
                         Debug.Log("upgrade!");
+                    }
+
+                    if (hit.transform.gameObject.tag == "RandomSkill")
+                    {
+                        if (gameSession.playerMoney >= gameSession.randomSkillCost)
+                        {
+                            gameSession.ActivateElectricFieldSkill();
+                            Debug.Log("skill");
+                        }
                     }
 
                 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] private Text waveText2;
     [SerializeField] private List<GameObject> UIList = new List<GameObject>();
     [SerializeField] private GameObject gameEndWindow;
+    [SerializeField] private Text playerMoneyTxt;
 
     [Header("UI-EnergySticks")]
     [SerializeField] private List<Image> energySticks = new List<Image>();
@@ -27,8 +29,26 @@ public class GameSession : MonoBehaviour
     [SerializeField] public int healthIncrementforZombies = 0;
     [SerializeField] public int damageIncrementforZombies = 0;
 
-    EnemySpawner enemySpawner;
+    [Header("Necessary Prefabs")]
+    [SerializeField] public GameObject energy;
+    [SerializeField] public List<GameObject> skills = new List<GameObject>();
 
+    [Header("SkillImages&Button")]
+    [SerializeField] private Image electricField;
+    [SerializeField] private Image skullFear;
+    [SerializeField] private Button spellButton;
+
+    [Header("Others")]
+    [SerializeField] public int randomSkillCost;
+    [SerializeField] private TextMeshPro randomSkillCostText;
+    [SerializeField] public int weaponUpgradeCost;
+    [SerializeField] private TextMeshPro weaponUpgradeCostText;
+
+
+    EnemySpawner enemySpawner;
+    PlayerShoot playerShoot;
+
+    public int playerMoney;
     private const int maxEnergyAmount = 6;
     private int energyAmount;
     public int waveIndex;
@@ -42,10 +62,17 @@ public class GameSession : MonoBehaviour
     void Start()
     {
         enemySpawner = FindObjectOfType<EnemySpawner>();
+        playerShoot = FindObjectOfType<PlayerShoot>();
         gameEndWindow.SetActive(false);
+        spellButton.GetComponent<Button>().interactable = false;
         //healthIncrementforZombies = (waveIndex-1) * 100;
         energyAmount = maxEnergyAmount;
         waveText.text = $"Wave {waveIndex}";
+
+        playerMoney = 0;
+        playerMoneyTxt.text = $"{playerMoney.ToString()}$";
+        randomSkillCostText.text = $"{randomSkillCost.ToString()}$";
+        weaponUpgradeCostText.text = $"{weaponUpgradeCost.ToString()}$";
 
         foreach (Image stick in energySticks)
         {
@@ -115,6 +142,40 @@ public class GameSession : MonoBehaviour
     {
         return energyAmount;
     }
+
+    public void GainMoney(int value)
+    {
+        playerMoney += value;
+        playerMoneyTxt.text = $"{playerMoney.ToString()}$";
+    }
+
+    public void SpendMoney(int value)
+    {
+        playerMoney -= value;
+        playerMoneyTxt.text = $"{playerMoney.ToString()}$";
+    }
+
+    public void ActivateElectricFieldSkill()
+    {
+        skullFear.enabled = false;
+        electricField.enabled = true;
+        playerShoot.castShockWave = true;
+        playerShoot.castEnemyFear = false;
+
+        spellButton.GetComponent<Button>().interactable = true;
+    }
+
+    public void ActivateScareSkill()
+    {
+
+        skullFear.enabled = true;
+        electricField.enabled = false;
+        playerShoot.castEnemyFear = true;
+        playerShoot.castShockWave = false;
+
+        spellButton.GetComponent<Button>().interactable = true;
+    }
+
 
 
 }

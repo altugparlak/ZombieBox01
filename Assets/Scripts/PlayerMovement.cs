@@ -15,12 +15,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] float attackRange = 5f;
     [SerializeField] float rotationSpeed = 1f;
-    [SerializeField] private Text playerMoneyTxt;
-    private int playerMoney;
-
-    [Header("SkillImages")]
-    [SerializeField] private Image electricField;
-    [SerializeField] private Image skullFear;
 
     [Header("Others")]
     [SerializeField] private GameObject enemyIndicator;
@@ -28,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Material mymat;
     [SerializeField] private float materialIntensity;
     [SerializeField] private GameObject skillPickUpEffect;
-    [SerializeField] public GameObject spellButton;
 
     public GameObject energy;
     public Joystick joystick;
@@ -53,12 +46,9 @@ public class PlayerMovement : MonoBehaviour
         playerShoot = GetComponent<PlayerShoot>();
         playerHealth = GetComponent<PlayerHealth>();
         speedvalueHolder = speed;
-        playerMoney = 0;
-        playerMoneyTxt.text = playerMoney.ToString();
         chicken = FindObjectOfType<ChickenBrain>().gameObject;
         notDeath = true;
         mymat.SetColor("_EmissionColor", new Color(0, 1, 0, 1) * materialIntensity);
-        spellButton.GetComponent<Button>().interactable = false;
         //Debug.Log(mymat.GetColor("_EmissionColor"));
     }
 
@@ -313,37 +303,25 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-        if (other.tag == "ElectricField")
-        {
-            ShowElectricFieldImage();
-            playerShoot.castShockWave = true;
-            playerShoot.castEnemyFear = false;
+        //if (other.tag == "ElectricField")
+        //{
+        //    ShowElectricFieldImage();
+        //    playerShoot.castShockWave = true;
+        //    playerShoot.castEnemyFear = false;
 
-            spellButton.GetComponent<Button>().interactable = true;
-            Destroy(other.gameObject.GetComponentInParent<Transform>().gameObject);
-        }
+        //    spellButton.GetComponent<Button>().interactable = true;
+        //    Destroy(other.gameObject.GetComponentInParent<Transform>().gameObject);
+        //}
 
-        if (other.tag == "Scare")
-        {
-            ShowSkullFearImage();
-            playerShoot.castEnemyFear = true;
-            playerShoot.castShockWave = false;
+        //if (other.tag == "Scare")
+        //{
+        //    ShowSkullFearImage();
+        //    playerShoot.castEnemyFear = true;
+        //    playerShoot.castShockWave = false;
 
-            spellButton.GetComponent<Button>().interactable = true;
-            Destroy(other.gameObject.GetComponentInParent<Transform>().gameObject);
-        }
-    }
-
-    public void GainMoney(int value)
-    {
-        playerMoney += value;
-        playerMoneyTxt.text = playerMoney.ToString();
-    }
-
-    public void SpendMoney(int value)
-    {
-        playerMoney -= value;
-        playerMoneyTxt.text = playerMoney.ToString();
+        //    spellButton.GetComponent<Button>().interactable = true;
+        //    Destroy(other.gameObject.GetComponentInParent<Transform>().gameObject);
+        //}
     }
 
     private void DroneColorControl()
@@ -376,18 +354,6 @@ public class PlayerMovement : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    private void ShowSkullFearImage()
-    {
-        skullFear.enabled = true;
-        electricField.enabled = false;
-    }
-
-    private void ShowElectricFieldImage()
-    {
-        skullFear.enabled = false;
-        electricField.enabled = true;
     }
 
 
