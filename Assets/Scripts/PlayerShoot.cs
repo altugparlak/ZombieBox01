@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class PlayerShoot : MonoBehaviour
 {
     [Header("Projectile")]
-    [SerializeField] private List<GameObject> projectiles;
+    [SerializeField] public List<GameObject> projectiles;
     [SerializeField] private GameObject shockWaveParticle;
     [SerializeField] private GameObject lightBumb;
 
     public GameObject projectile;
     public GameObject parent;
+    public int projectileIndex = 0;
+
 
     [Header("Weapon Positions")]
     [SerializeField] private Transform singleBulletFireTransform;
@@ -20,18 +22,19 @@ public class PlayerShoot : MonoBehaviour
 
     [Header("Others")]
     [SerializeField] private bool dualShot;
-    [SerializeField] AudioClip laserShootingSound;
-    [SerializeField] AudioClip machineGunSound;
-    [SerializeField] AudioClip electricFieldSound;
+    [SerializeField] public AudioClip laserShootingSound0;
+    [SerializeField] public AudioClip laserShootingSound1;
+    [SerializeField] public AudioClip laserShootingSound2;
+    [SerializeField] public AudioClip machineGunSound;
+    [SerializeField] public AudioClip electricFieldSound;
     public AudioSource audioSource;
-
+    public AudioClip currentWeaponShootingSound;
 
     PlayerMovement playerMovement;
     PlayerHealth playerHealth;
 
     public bool notDeath1 = true;
     private bool canShoot = true;
-    private int projectileIndex = 0;
     public float shootingWaitTime = 1.5f;
 
     public bool castShockWave = false;
@@ -43,13 +46,14 @@ public class PlayerShoot : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         playerHealth = GetComponent<PlayerHealth>();
         projectile = projectiles[projectileIndex];
+        currentWeaponShootingSound = machineGunSound;
         notDeath1 = true;
     }
     public void ShootingProgress(Vector3 lookvector)
     {
         if (canShoot && notDeath1)
         {
-            audioSource.PlayOneShot(machineGunSound);
+            audioSource.PlayOneShot(currentWeaponShootingSound);
             if (dualShot)
             {
                 DualFire(lookvector);
@@ -157,7 +161,7 @@ public class PlayerShoot : MonoBehaviour
                 {
                     enemy.GetComponent<EnemyAI>().StartScaring();
                 }
-                castEnemyFear = false;
+                //castEnemyFear = false;
             }
         }
     }

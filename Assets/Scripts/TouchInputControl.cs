@@ -5,6 +5,7 @@ using UnityEngine;
 public class TouchInputControl : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private SoundEffects soundEffects;
 
     GameSession gameSession;
 
@@ -31,15 +32,31 @@ public class TouchInputControl : MonoBehaviour
                 {
                     if (hit.transform.gameObject.tag == "WeaponUpgrade")
                     {
-                        Debug.Log("upgrade!");
+                        if (gameSession.playerMoney >= gameSession.weaponUpgradeCost)
+                        {
+
+                            gameSession.WeaponUpgrade();
+                            gameSession.SpendMoney(gameSession.randomSkillCost);
+                            soundEffects.PlayUpgradeClickSound();
+                        }
+                        else
+                        {
+                            soundEffects.PlayCantUpgradeClickSound();
+                        }
                     }
 
                     if (hit.transform.gameObject.tag == "RandomSkill")
                     {
                         if (gameSession.playerMoney >= gameSession.randomSkillCost)
                         {
-                            gameSession.ActivateElectricFieldSkill();
-                            Debug.Log("skill");
+
+                            gameSession.PickRandomSkillandActivate();
+                            gameSession.SpendMoney(gameSession.randomSkillCost);
+                            soundEffects.PlayUpgradeClickSound();
+                        }
+                        else
+                        {
+                            soundEffects.PlayCantUpgradeClickSound();
                         }
                     }
 

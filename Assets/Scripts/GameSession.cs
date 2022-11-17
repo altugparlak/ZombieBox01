@@ -155,7 +155,23 @@ public class GameSession : MonoBehaviour
         playerMoneyTxt.text = $"{playerMoney.ToString()}$";
     }
 
-    public void ActivateElectricFieldSkill()
+    public void PickRandomSkillandActivate()
+    {
+        int randomNumber = UnityEngine.Random.Range(0, 2);
+        switch (randomNumber)
+        {
+            case 0:
+                ActivateElectricFieldSkill();
+                break;
+            case 1:
+                ActivateScareSkill();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void ActivateElectricFieldSkill()
     {
         skullFear.enabled = false;
         electricField.enabled = true;
@@ -165,7 +181,7 @@ public class GameSession : MonoBehaviour
         spellButton.GetComponent<Button>().interactable = true;
     }
 
-    public void ActivateScareSkill()
+    private void ActivateScareSkill()
     {
 
         skullFear.enabled = true;
@@ -174,6 +190,16 @@ public class GameSession : MonoBehaviour
         playerShoot.castShockWave = false;
 
         spellButton.GetComponent<Button>().interactable = true;
+    }
+
+    public void WeaponUpgrade()
+    {
+        playerShoot.projectileIndex++;
+        if (playerShoot.projectileIndex >= playerShoot.projectiles.Count)
+            playerShoot.projectileIndex = playerShoot.projectiles.Count - 1;
+
+        playerShoot.projectile = playerShoot.projectiles[playerShoot.projectileIndex];
+        playerShoot.currentWeaponShootingSound = playerShoot.laserShootingSound0;
     }
 
 

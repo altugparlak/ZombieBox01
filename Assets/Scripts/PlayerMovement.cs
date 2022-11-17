@@ -299,8 +299,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.tag == "Energy")
         {
-            playerHealth.gameSession.addEnergy(2);
-            Destroy(other.gameObject);
+            int currentEnergy = playerHealth.gameSession.GetEnergyAmount();
+            if (currentEnergy == 6)
+            {
+                Debug.Log("Energy is full!");
+            }
+            else if (currentEnergy == 5)
+            {
+                playerHealth.gameSession.addEnergy(1);
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                playerHealth.gameSession.addEnergy(2);
+                Destroy(other.gameObject);
+            }
+            
+
         }
 
         //if (other.tag == "ElectricField")
