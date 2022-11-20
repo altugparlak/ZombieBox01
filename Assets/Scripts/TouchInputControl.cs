@@ -36,8 +36,10 @@ public class TouchInputControl : MonoBehaviour
                         {
 
                             gameSession.WeaponUpgrade();
-                            gameSession.SpendMoney(gameSession.randomSkillCost);
+                            gameSession.SpendMoney(gameSession.weaponUpgradeCost);
                             soundEffects.PlayUpgradeClickSound();
+                            gameSession.weaponUpgradeCost += 500;
+                            gameSession.weaponUpgradeCostText.text = $"{gameSession.weaponUpgradeCost.ToString()}$";
                         }
                         else
                         {
@@ -53,6 +55,8 @@ public class TouchInputControl : MonoBehaviour
                             gameSession.PickRandomSkillandActivate();
                             gameSession.SpendMoney(gameSession.randomSkillCost);
                             soundEffects.PlayUpgradeClickSound();
+                            gameSession.randomSkillCost += 100;
+                            gameSession.randomSkillCostText.text = $"{gameSession.randomSkillCost.ToString()}$";
                         }
                         else
                         {

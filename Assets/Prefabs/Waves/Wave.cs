@@ -10,10 +10,5 @@ public class Wave : ScriptableObject
 
     [Header("Wave Spects")]
     public int totalNumberOfZombies;
-    public int totalCoin;
-    public float coinSpawnPossibility;
-    public int totoldualW;
-    public float dualWeaponShotSpawnPossibility;
-
 
 }

@@ -99,9 +99,10 @@ public class EnemySpawner : MonoBehaviour
 
         if (wave > 10)
         {
-            waveAmount = waves[waves.Count].totalNumberOfZombies;
-            choosenWave = waves[waves.Count]; //Son Random Wave
+            waveAmount = waves[waves.Count-1].totalNumberOfZombies + gameSession.waveAmountIncrement;
+            choosenWave = waves[waves.Count-1]; //Son Random Wave
             WaveRandomOperator(choosenWave);
+            gameSession.waveAmountIncrement += 10;
         }
         else
         {
@@ -112,6 +113,7 @@ public class EnemySpawner : MonoBehaviour
         numberOfEnemiesForTheWave = waveAmount;
         Debug.Log("Wave number: " + (wave + 1));
         Debug.Log("Wave Amount: " + waveAmount);
+        Debug.Log(choosenWave);
         StartTheNextWave();
 
     }

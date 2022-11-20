@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
     {
         gameSession = FindObjectOfType<GameSession>();
         animator = GetComponent<Animator>();
-        playerHealth = 1000;
+        playerHealth = 1500;
         healthbar.value = ((float)playerHealth / (float)1000);
         
     }

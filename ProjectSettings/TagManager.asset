@@ -17,6 +17,7 @@ TagManager:
   - Scare
   - WeaponUpgrade
   - RandomSkill
+  - Fire
   layers:
   - Default
   - TransparentFX

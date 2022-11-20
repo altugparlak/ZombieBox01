@@ -157,14 +157,25 @@ public class EnemyAI : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<ProjectileMovement>() != null)
         {
-            TakeDamage(collision.gameObject.GetComponent<ProjectileMovement>().projectileDamege);
+            TakeDamage(playerMovement.GetComponent<PlayerShoot>().projectileDamage);
             //Debug.Log("particle");
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        TakeDamage(1000);
+        if (other.tag == "ElectricField")
+        {
+            TakeDamage(playerMovement.GetComponent<PlayerShoot>().electricFieldStartDamage);
+        }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.tag == "Fire")
+        {
+            TakeDamage(playerMovement.GetComponent<PlayerShoot>().fireSkillStartDamage);
+        }
     }
 
 

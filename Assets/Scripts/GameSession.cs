@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GameSession : MonoBehaviour
 {
     [Header("UI")]
-    //[SerializeField] private Animator animator;
     [SerializeField] private Animator waveTextAnimator;
     [SerializeField] private Text waveText;
     [SerializeField] private Text waveText2;
@@ -19,8 +18,6 @@ public class GameSession : MonoBehaviour
     [SerializeField] private List<Image> energySticks = new List<Image>();
 
     [Header("Wave Specs")]
-    //[SerializeField] public int waveAmount = 20;
-    //[SerializeField] public int waveAmountIncreament = 10;
     [Tooltip("Lower the number, faster the speed")]
     [SerializeField] public float waveSpawningSpeed = 3f;
     [SerializeField] public int waveAmountIncrement = 10;
@@ -34,16 +31,18 @@ public class GameSession : MonoBehaviour
     [SerializeField] public List<GameObject> skills = new List<GameObject>();
 
     [Header("SkillImages&Button")]
-    [SerializeField] private Image electricField;
-    [SerializeField] private Image skullFear;
+    [SerializeField] private Image electricFieldImage;
+    [SerializeField] private Image skullFearImage;
+    [SerializeField] private Image fireImage;
+
     [SerializeField] private Button spellButton;
 
     [Header("Others")]
     [SerializeField] public int randomSkillCost;
-    [SerializeField] private TextMeshPro randomSkillCostText;
+    [SerializeField] public TextMeshPro randomSkillCostText;
     [SerializeField] public int weaponUpgradeCost;
-    [SerializeField] private TextMeshPro weaponUpgradeCostText;
-
+    [SerializeField] public TextMeshPro weaponUpgradeCostText;
+    [SerializeField] private int weaponDamageIncrement;
 
     EnemySpawner enemySpawner;
     PlayerShoot playerShoot;
@@ -65,7 +64,6 @@ public class GameSession : MonoBehaviour
         playerShoot = FindObjectOfType<PlayerShoot>();
         gameEndWindow.SetActive(false);
         spellButton.GetComponent<Button>().interactable = false;
-        //healthIncrementforZombies = (waveIndex-1) * 100;
         energyAmount = maxEnergyAmount;
         waveText.text = $"Wave {waveIndex}";
 
@@ -103,6 +101,7 @@ public class GameSession : MonoBehaviour
 
     }
 
+
     public void addEnergy(int amount)
     {
         energyAmount += amount;
@@ -118,8 +117,14 @@ public class GameSession : MonoBehaviour
 
     public void SetUpTheNextWave()
     {
+        if (waveIndex % 5 == 0)
+        {
+            Debug.Log("ZombiesHealthUpgrade!");
+            healthIncrementforZombies = (waveIndex - 1) * 20;
+        }
+        //Every 5 wave zombies should get stronger
+        //Relatively to that playerWeapon should also be upgradable
         waveIndex++;
-        //healthIncrementforZombies = (waveIndex - 1) * 100;
         waveText.text = $"Wave {waveIndex}";
         waveText2.text = $"Wave {waveIndex}";
 
@@ -154,10 +159,25 @@ public class GameSession : MonoBehaviour
         playerMoney -= value;
         playerMoneyTxt.text = $"{playerMoney.ToString()}$";
     }
+    
+    public void WeaponUpgrade()
+    {
+        playerShoot.projectileIndex++;
+        if (playerShoot.projectileIndex >= playerShoot.projectiles.Count)
+            playerShoot.projectileIndex = playerShoot.projectiles.Count - 1;
 
+        playerShoot.projectile = playerShoot.projectiles[playerShoot.projectileIndex];
+        playerShoot.currentWeaponShootingSound = playerShoot.shootingSounds[playerShoot.projectileIndex];
+        playerShoot.projectileDamage += 100;
+        //weaponUpgradeCost += 500;
+        //weaponUpgradeCostText.text = $"{weaponUpgradeCost.ToString()}$";
+
+    }
+
+    #region SkillManagement
     public void PickRandomSkillandActivate()
     {
-        int randomNumber = UnityEngine.Random.Range(0, 2);
+        int randomNumber = UnityEngine.Random.Range(0, 3);
         switch (randomNumber)
         {
             case 0:
@@ -166,15 +186,21 @@ public class GameSession : MonoBehaviour
             case 1:
                 ActivateScareSkill();
                 break;
+            case 2:
+                ActivateFireSkill();
+                break;
             default:
                 break;
         }
+        //randomSkillCost += 100;
+        //randomSkillCostText.text = $"{randomSkillCost.ToString()}$";
     }
 
     private void ActivateElectricFieldSkill()
     {
-        skullFear.enabled = false;
-        electricField.enabled = true;
+        fireImage.enabled = false;
+        skullFearImage.enabled = false;
+        electricFieldImage.enabled = true;
         playerShoot.castShockWave = true;
         playerShoot.castEnemyFear = false;
 
@@ -183,25 +209,26 @@ public class GameSession : MonoBehaviour
 
     private void ActivateScareSkill()
     {
-
-        skullFear.enabled = true;
-        electricField.enabled = false;
+        fireImage.enabled = false;
+        skullFearImage.enabled = true;
+        electricFieldImage.enabled = false;
         playerShoot.castEnemyFear = true;
         playerShoot.castShockWave = false;
 
         spellButton.GetComponent<Button>().interactable = true;
     }
 
-    public void WeaponUpgrade()
+    private void ActivateFireSkill()
     {
-        playerShoot.projectileIndex++;
-        if (playerShoot.projectileIndex >= playerShoot.projectiles.Count)
-            playerShoot.projectileIndex = playerShoot.projectiles.Count - 1;
-
-        playerShoot.projectile = playerShoot.projectiles[playerShoot.projectileIndex];
-        playerShoot.currentWeaponShootingSound = playerShoot.laserShootingSound0;
+        fireImage.enabled = true;
+        skullFearImage.enabled = false;
+        electricFieldImage.enabled = false;
+        playerShoot.castEnemyFear = false;
+        playerShoot.castShockWave = false;
+        playerShoot.castFire = true;
+        spellButton.GetComponent<Button>().interactable = true;
     }
 
-
+    #endregion
 
 }

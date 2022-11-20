@@ -8,8 +8,12 @@ public class PlayerShoot : MonoBehaviour
     [Header("Projectile")]
     [SerializeField] public List<GameObject> projectiles;
     [SerializeField] private GameObject shockWaveParticle;
-    [SerializeField] private GameObject lightBumb;
+    [SerializeField] private GameObject fire;
 
+    public int projectileDamage;
+    private static int projectileStartDamage = 40;
+    public int fireSkillStartDamage = 5;
+    public int electricFieldStartDamage = 1000;
     public GameObject projectile;
     public GameObject parent;
     public int projectileIndex = 0;
@@ -22,10 +26,8 @@ public class PlayerShoot : MonoBehaviour
 
     [Header("Others")]
     [SerializeField] private bool dualShot;
-    [SerializeField] public AudioClip laserShootingSound0;
-    [SerializeField] public AudioClip laserShootingSound1;
-    [SerializeField] public AudioClip laserShootingSound2;
-    [SerializeField] public AudioClip machineGunSound;
+    [SerializeField] public List<AudioClip> shootingSounds;
+
     [SerializeField] public AudioClip electricFieldSound;
     public AudioSource audioSource;
     public AudioClip currentWeaponShootingSound;
@@ -39,6 +41,7 @@ public class PlayerShoot : MonoBehaviour
 
     public bool castShockWave = false;
     public bool castEnemyFear = false;
+    public bool castFire = false;
 
     private void Start()
     {
@@ -46,8 +49,9 @@ public class PlayerShoot : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         playerHealth = GetComponent<PlayerHealth>();
         projectile = projectiles[projectileIndex];
-        currentWeaponShootingSound = machineGunSound;
+        currentWeaponShootingSound = shootingSounds[projectileIndex];
         notDeath1 = true;
+        projectileDamage = projectileStartDamage;
     }
     public void ShootingProgress(Vector3 lookvector)
     {
@@ -164,6 +168,20 @@ public class PlayerShoot : MonoBehaviour
                 //castEnemyFear = false;
             }
         }
+        else if (castFire)
+        {
+            if (enoughEnergy)
+            {
+                StartCoroutine(CastFire(5f));
+            }
+        }
+    }
+
+    private IEnumerator CastFire(float waitTime)
+    {
+        fire.SetActive(true);
+        yield return new WaitForSeconds(waitTime);
+        fire.SetActive(false);
     }
 
     //public void CastShockWave()

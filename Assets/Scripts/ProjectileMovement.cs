@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProjectileMovement : MonoBehaviour
 {
-    [SerializeField] public int projectileDamege;
     public float speed = 1f;
     public GameObject hit;
     public GameObject flash;

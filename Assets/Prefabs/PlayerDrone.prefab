@@ -3227,7 +3227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf2f0f3fbf54a2481b2dd767d1b39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedBoostEffect: {fileID: 1595252117517162, guid: e7776336bc56a9b4caa1c90ea92ff765,
+  SpeedBoostEffect: {fileID: 1564468091806366, guid: efdb070cacdf84a7f8661f2008902ca4,
     type: 3}
   parent: {fileID: 0}
   speed: 4
@@ -3235,11 +3235,9 @@ MonoBehaviour:
   rotationSpeed: 1000
   enemyIndicator: {fileID: 0}
   mainCamera: {fileID: 0}
-  coinDisplayText: {fileID: 0}
-  mymat: {fileID: 0}
-  materialIntensity: 0
-  skillPickUpEffect: {fileID: 0}
-  spellButton: {fileID: 0}
+  mymat: {fileID: 2100000, guid: f03c407413b41754792f7ba60761c927, type: 2}
+  materialIntensity: 1.7
+  skillPickUpEffect: {fileID: 100000, guid: aa3fed151f536ee49b583c6a3ac4a2e1, type: 3}
   energy: {fileID: 0}
   joystick: {fileID: 0}
   enemies: []
@@ -3261,21 +3259,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 1564468091806366, guid: 08987c81973e24e6cbe3ab68c8638879, type: 3}
-  shockWaveParticle: {fileID: 0}
+  - {fileID: 1636010081862624, guid: d5799e6bed1b1457dad59d250003c0bf, type: 3}
+  - {fileID: 1453648102191072, guid: 8d9db2530f375449e9666f13a78529c4, type: 3}
+  - {fileID: 1658112780640456, guid: 920b2bcc093a74e79a2d55ddc2cac61f, type: 3}
+  - {fileID: 1019054629656254, guid: 5e98493e91d384d108df9b6a342e3e12, type: 3}
+  - {fileID: 1841414879310842, guid: afcd08cc8a5434b269e7b2cc5c18b5af, type: 3}
+  shockWaveParticle: {fileID: 1595252117517162, guid: c00b6ea84ba04489790dcac1d3cf5e1f,
+    type: 3}
+  fire: {fileID: 100004, guid: 01d855de9e6424c23afa7eb16fa9e615, type: 3}
+  projectileDamage: 0
   projectile: {fileID: 0}
   parent: {fileID: 0}
+  projectileIndex: 0
   singleBulletFireTransform: {fileID: 1594631178293328803}
   dualBulletFireTransform1: {fileID: 4212776366074509122}
   dualBulletFireTransform2: {fileID: 8163410747802245534}
   dualShot: 0
-  laserShootingSound: {fileID: 8300000, guid: 4310474905e266640852f43bd609a1a4, type: 3}
-  machineGunSound: {fileID: 8300000, guid: 3061c7b9b32d894478e4126ccce25ca3, type: 3}
-  electricFieldSound: {fileID: 0}
+  shootingSounds:
+  - {fileID: 8300000, guid: 3061c7b9b32d894478e4126ccce25ca3, type: 3}
+  - {fileID: 8300000, guid: b1b9c1f0ea1fcae439ed1a4d44ff05fd, type: 3}
+  - {fileID: 8300000, guid: 2502cd40f6bc94b798836fa585ff8487, type: 3}
+  - {fileID: 8300000, guid: a0612764fa4fc427e9a5c458811b689f, type: 3}
+  - {fileID: 8300000, guid: a0612764fa4fc427e9a5c458811b689f, type: 3}
+  - {fileID: 8300000, guid: 78419f98379502c4dbfb2774bc94e7c1, type: 3}
+  electricFieldSound: {fileID: 8300000, guid: ab297b593498a6e47ba84de770477cbe, type: 3}
   audioSource: {fileID: 0}
+  currentWeaponShootingSound: {fileID: 0}
   notDeath1: 1
   shootingWaitTime: 1.5
   castShockWave: 0
-  castElectricField: 0
+  castEnemyFear: 0
 --- !u!114 &5275570813057777747
 MonoBehaviour:
   m_ObjectHideFlags: 0
