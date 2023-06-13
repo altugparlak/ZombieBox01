@@ -13,6 +13,10 @@ public class GameSession : MonoBehaviour
     [SerializeField] private List<GameObject> UIList = new List<GameObject>();
     [SerializeField] private GameObject gameEndWindow;
     [SerializeField] private Text playerMoneyTxt;
+    [SerializeField] private GameObject transparentImage; // for pause scene
+    [SerializeField] private GameObject pauseButton;
+    [SerializeField] private GameObject resumeButton;
+
 
     [Header("UI-EnergySticks")]
     [SerializeField] private List<Image> energySticks = new List<Image>();
@@ -231,4 +235,23 @@ public class GameSession : MonoBehaviour
 
     #endregion
 
+
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        pauseButton.SetActive(false);
+        transparentImage.SetActive(true);
+        resumeButton.SetActive(true);
+        //isPaused = true;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        //isPaused = false;
+        pauseButton.SetActive(true);
+        transparentImage.SetActive(false);
+        resumeButton.SetActive(false);
+    }
 }
