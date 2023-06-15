@@ -16,6 +16,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] private GameObject transparentImage; // for pause scene
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject resumeButton;
+    [SerializeField] private GameObject quitButton;
+
 
 
     [Header("UI-EnergySticks")]
@@ -243,6 +245,7 @@ public class GameSession : MonoBehaviour
         pauseButton.SetActive(false);
         transparentImage.SetActive(true);
         resumeButton.SetActive(true);
+        quitButton.SetActive(true);
         //isPaused = true;
     }
 
@@ -253,5 +256,6 @@ public class GameSession : MonoBehaviour
         pauseButton.SetActive(true);
         transparentImage.SetActive(false);
         resumeButton.SetActive(false);
+        quitButton.SetActive(false);
     }
 }

@@ -9,7 +9,7 @@ public class SceneManagement : MonoBehaviour
     [SerializeField] private Image transparentImage;
     [SerializeField] private ParticleSystem baths;
 
-    private float StartSceneLoadDelay = 1f;
+    private float StartSceneLoadDelay = 0.5f;
     private float LevelLoadDelay = 1.7f;
     private float LevelRestartDelay = 1f;
 
@@ -20,6 +20,7 @@ public class SceneManagement : MonoBehaviour
     private void Start()
     {
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
     }
 
     public void LoadNextScene()
@@ -30,13 +31,14 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadStartScene()
     {
+        Time.timeScale = 1f;
         StartCoroutine(LoadStartMenu());
     }
 
     IEnumerator LoadStartMenu()
     {
         yield return new WaitForSecondsRealtime(StartSceneLoadDelay);
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene("MainMenu");
     }
 
     IEnumerator LoadNextLevel()

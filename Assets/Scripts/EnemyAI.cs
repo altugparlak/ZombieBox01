@@ -63,7 +63,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (target!= null)
+        if (target != null)
         {
             if (enemyScared)
                 EnemyScaredAndRun();
