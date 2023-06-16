@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player")]
     [SerializeField] float speed = 1f;
     [SerializeField] float attackRange = 5f;
-    [SerializeField] float rotationSpeed = 1f;
+    [SerializeField] float smoothRotSpeed = 10f;
 
     [Header("Others")]
     [SerializeField] private GameObject enemyIndicator;
@@ -39,9 +40,13 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject chicken;
 
+    private NavMeshAgent navMeshAgent;
+    private RaycastHit hit;
+    public LayerMask groundLayer;
 
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
         enemies = new List<Transform>();
         playerShoot = GetComponent<PlayerShoot>();
         playerHealth = GetComponent<PlayerHealth>();
@@ -64,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         if (target!=null)
         {
             float distanceToTarget = Vector3.Distance(GetClosestEnemy(enemies).position, transform.position);
+            Quaternion rotBeforeShooting = transform.rotation;
+
             if (distanceToTarget <= attackRange)
             {
                 Vector3 lookVector = GetClosestEnemy(enemies).position - transform.position;
@@ -84,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                //SmoothlyTurnBacktoDefaultRotation();
+                SmoothlyTurnBacktoDefaultRotation(rotBeforeShooting);
                 shooting = false;
             }
 
@@ -95,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
             shooting = false;
         }
 
-        transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
+        //transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
         if (distancetoChicken > attackRange)
         {
             chicken.GetComponent<ChickenBrain>().running = false;
@@ -104,8 +111,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (notDeath)
         {
-            MoveWithController();
-            MoveWithKeyboard();
+            MoveWithMouse();
         }
 
 
@@ -118,44 +124,21 @@ public class PlayerMovement : MonoBehaviour
         DroneColorControl();
 
     }
-
-    private void MoveWithKeyboard()
+    private void MoveWithMouse()
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(moveHorizontal, 0f, moveVertical);
-
-        if (direction.magnitude >= 0.1f)
+        if (Input.GetMouseButton(0))
         {
-            characterController.Move(direction.normalized * speed * Time.deltaTime);
-            if (!shooting)
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
             {
-                Quaternion toRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
+                if (hit.collider.CompareTag("Terrain"))
+                {
+                    navMeshAgent.SetDestination(hit.point);
+                }
             }
         }
     }
-
-    private void MoveWithController()
-    {
-        float moveHorizontal = joystick.Horizontal;
-        float moveVertical = joystick.Vertical;
-        Vector3 direction = new Vector3(moveHorizontal,0f,moveVertical);
-        
-        if (direction.magnitude >= 0.1f)
-        {
-            characterController.Move(direction.normalized * speed * Time.deltaTime);
-            if (!shooting)
-            {
-                Quaternion toRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
-            }
-
-        }
-        
-
-    }
-
 
     void OnDrawGizmosSelected()
     {
@@ -289,10 +272,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void SmoothlyTurnBacktoDefaultRotation()
+    private void SmoothlyTurnBacktoDefaultRotation(Quaternion rot)
     {
-        var desiredRotQ = Quaternion.Euler(0, 0, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotQ, Time.deltaTime * 5);
+        //var desiredRotQ = Quaternion.Euler(0, 0, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * smoothRotSpeed);
     }
 
     private void OnTriggerEnter(Collider other) // Skill PickUp

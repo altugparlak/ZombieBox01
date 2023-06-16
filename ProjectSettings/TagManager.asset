@@ -18,6 +18,7 @@ TagManager:
   - WeaponUpgrade
   - RandomSkill
   - Fire
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Player
   - Projectile
   - 
-  - 
+  - Ground
   - IndicatorBox
   - Volume
   - Enemy
