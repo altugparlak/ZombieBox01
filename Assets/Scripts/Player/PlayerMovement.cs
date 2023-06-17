@@ -50,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
         enemies = new List<Transform>();
         playerShoot = GetComponent<PlayerShoot>();
         playerHealth = GetComponent<PlayerHealth>();
-        speedvalueHolder = speed;
+        navMeshAgent.speed = speed;
+        speedvalueHolder = navMeshAgent.speed;
         chicken = FindObjectOfType<ChickenBrain>().gameObject;
         notDeath = true;
         mymat.SetColor("_EmissionColor", new Color(0, 1, 0, 1) * materialIntensity);
@@ -78,6 +79,9 @@ public class PlayerMovement : MonoBehaviour
                 if (notDeath)
                 {
                     Quaternion rot = Quaternion.LookRotation(lookVector);
+                    // Keep the X rotation unchanged
+                    rot.x = transform.rotation.x;
+                    rot.z = transform.rotation.z;
                     transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
                 }
                 playerShoot.ShootingProgress(lookVector);
@@ -198,7 +202,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator SpeedBoost(float time)
     {
         speedBoostActivated = true;
-        speed = speedvalueHolder * 2;
+        navMeshAgent.speed = speedvalueHolder * 2;
         
         GameObject shoot = Instantiate(SpeedBoostEffect, transform.position, Quaternion.identity);
         SpeedBoostObject = shoot;
@@ -207,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
         
         yield return new WaitForSeconds(time);
         speedBoostActivated = false;
-        speed = speedvalueHolder;
+        navMeshAgent.speed = speedvalueHolder;
     }
 
 

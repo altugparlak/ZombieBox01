@@ -836,6 +836,7 @@ MonoBehaviour:
   zombie: {fileID: 11400000, guid: 571aab836c1f449f08b78aa2b283cae1, type: 2}
   hitVFX: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
   scaredVFX: {fileID: 100002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+  energyDropChance: 100
   deathVFX: {fileID: 1636871764186634, guid: 9a7c6bfff5ad87d409e200fe3a0d5036, type: 3}
 --- !u!136 &6784900763359691704
 CapsuleCollider:

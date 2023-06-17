@@ -13,6 +13,10 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] public Zombie zombie;
     [SerializeField] private GameObject hitVFX;
     [SerializeField] private GameObject scaredVFX;
+
+    [Range(1, 100)]
+    [SerializeField] private int energyDropChance = 10;
+    private int energyNegDropChance=90;
     private GameObject scaredVFXx;
     private int enemyHealth;
     private int enemyDamage;
@@ -59,6 +63,8 @@ public class EnemyAI : MonoBehaviour
 
         navMeshAgent.speed = zombie.movementSpeed;
         EnemyStatsSetUp();
+
+        energyNegDropChance = 100 - energyDropChance;
     }
 
     void Update()
@@ -212,11 +218,11 @@ public class EnemyAI : MonoBehaviour
 
     private void ShuffleList()
     {
-        for (int i = 0; i < 90; i++)
+        for (int i = 0; i < energyNegDropChance; i++)
         {
             randomList.Add(0);
         }
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < energyDropChance; i++)
         {
             randomList.Add(1);
         }

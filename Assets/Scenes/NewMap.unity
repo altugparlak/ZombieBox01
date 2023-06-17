@@ -86652,7 +86652,7 @@ MonoBehaviour:
   energy: {fileID: 0}
   joystick: {fileID: 0}
   enemies: []
-  characterController: {fileID: 5753666746579133732}
+  characterController: {fileID: 0}
   target: {fileID: 0}
   notDeath: 1
   chicken: {fileID: 0}
@@ -88317,9 +88317,8 @@ GameObject:
   - component: {fileID: 2034607339420103212}
   - component: {fileID: 5275570813329470180}
   - component: {fileID: 5753666746579133731}
-  - component: {fileID: 5753666746579133732}
   m_Layer: 6
-  m_Name: PlayerDrone (1)
+  m_Name: PlayerDroneNew
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89685,24 +89684,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!143 &5753666746579133732
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497298147423194505}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 1.5
-  m_Radius: 0.54
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &5753666746579133733
 NavMeshAgent:
   m_ObjectHideFlags: 0
