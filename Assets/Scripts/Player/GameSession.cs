@@ -52,6 +52,7 @@ public class GameSession : MonoBehaviour
 
     EnemySpawner enemySpawner;
     PlayerShoot playerShoot;
+    PlayerMovement playerMovement;
 
     public int playerMoney;
     private const int maxEnergyAmount = 6;
@@ -68,9 +69,11 @@ public class GameSession : MonoBehaviour
     {
         enemySpawner = FindObjectOfType<EnemySpawner>();
         playerShoot = FindObjectOfType<PlayerShoot>();
+        playerMovement = playerShoot.GetComponent<PlayerMovement>();
         gameEndWindow.SetActive(false);
         spellButton.GetComponent<Button>().interactable = false;
         energyAmount = maxEnergyAmount;
+        playerMovement.currentEnergy = energyAmount;
         waveText.text = $"Wave {waveIndex}";
 
         playerMoney = 0;
@@ -104,7 +107,7 @@ public class GameSession : MonoBehaviour
             energyUsable = false;
             Debug.Log("Not Enough Energy!");
         }
-
+        playerMovement.currentEnergy = energyAmount;
     }
 
 
@@ -119,6 +122,7 @@ public class GameSession : MonoBehaviour
         {
             energySticks[i].enabled = true;
         }
+        playerMovement.currentEnergy = energyAmount;
     }
 
     public void SetUpTheNextWave()

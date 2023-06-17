@@ -7,10 +7,10 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Projectile")]
-    public GameObject SpeedBoostEffect;
     public GameObject parent;
     private GameObject SpeedBoostObject;
     private bool speedBoostActivated = false;
+    private ObjectPoolManager objectPoolManager;
 
     [Header("Player")]
     [SerializeField] float speed = 1f;
@@ -38,11 +38,13 @@ public class PlayerMovement : MonoBehaviour
     private float speedvalueHolder;
     //private static Color defaultColor = new Color(1.528f, 0.855f, 0.353f, 1f);
 
-    public GameObject chicken;
+    private ChickenBrain chickenBrain;
 
     private NavMeshAgent navMeshAgent;
+    private bool isMoving = false;
     private RaycastHit hit;
     public LayerMask groundLayer;
+    public int currentEnergy=0;
 
     void Start()
     {
@@ -52,15 +54,16 @@ public class PlayerMovement : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         navMeshAgent.speed = speed;
         speedvalueHolder = navMeshAgent.speed;
-        chicken = FindObjectOfType<ChickenBrain>().gameObject;
+        chickenBrain = FindObjectOfType<ChickenBrain>().gameObject.GetComponent<ChickenBrain>();
         notDeath = true;
         mymat.SetColor("_EmissionColor", new Color(0, 1, 0, 1) * materialIntensity);
         //Debug.Log(mymat.GetColor("_EmissionColor"));
+        objectPoolManager = ObjectPoolManager.Instance;
     }
 
     void Update()
     {
-        float distancetoChicken = Vector3.Distance(chicken.transform.position, transform.position);
+        float distancetoChicken = Vector3.Distance(chickenBrain.transform.position, transform.position);
         if (enemies.Count != 0)
         {
             //GetClosestEnemy(enemies).gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
@@ -88,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
                 shooting = true;
                 if (distancetoChicken <= attackRange)
                 {
-                    chicken.GetComponent<ChickenBrain>().running = true;
+                    chickenBrain.running = true;
                     //Debug.Log("Run Chickens!");
                 }
                 //Debug.Log("Attack!");
@@ -109,17 +112,24 @@ public class PlayerMovement : MonoBehaviour
         //transform.position = new Vector3(transform.position.x, 1.1f, transform.position.z);
         if (distancetoChicken > attackRange)
         {
-            chicken.GetComponent<ChickenBrain>().running = false;
+            chickenBrain.running = false;
             //Debug.Log("Relax Chicken");
         }
 
-        if (notDeath)
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartMovement();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            StopMovement();
+        }
+
+        if (notDeath && isMoving)
         {
             MoveWithMouse();
         }
 
-
-        //IsVisibleOnScreen(energy);
         if (speedBoostActivated)
         {
             SpeedBoostObject.transform.position = transform.position;
@@ -128,18 +138,26 @@ public class PlayerMovement : MonoBehaviour
         DroneColorControl();
 
     }
+
+    private void StartMovement()
+    {
+        isMoving = true;
+    }
+
+    private void StopMovement()
+    {
+        isMoving = false;
+    }
+
     private void MoveWithMouse()
     {
-        if (Input.GetMouseButton(0))
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
+        {
+            if (hit.collider.CompareTag("Terrain"))
             {
-                if (hit.collider.CompareTag("Terrain"))
-                {
-                    navMeshAgent.SetDestination(hit.point);
-                }
+                navMeshAgent.SetDestination(hit.point);
             }
         }
     }
@@ -162,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
 
     //private void FindTheClosestEnemy()
     //{
-        
+
     //    foreach (Transform enemyAI in enemies)
     //    {
     //        distanceToTarget = Vector3.Distance(enemyAI.transform.position, transform.position);
@@ -176,19 +194,23 @@ public class PlayerMovement : MonoBehaviour
         Transform bestTarget = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
+
         foreach (Transform potentialTarget in enemies)
         {
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            float sqrDistanceToTarget = directionToTarget.sqrMagnitude;
+
+            if (sqrDistanceToTarget < closestDistanceSqr)
             {
-                closestDistanceSqr = dSqrToTarget;
+                closestDistanceSqr = sqrDistanceToTarget;
                 bestTarget = potentialTarget;
             }
         }
+
         target = bestTarget;
         return bestTarget;
     }
+
 
     public void ActivateSpeedBoost()
     {
@@ -203,15 +225,18 @@ public class PlayerMovement : MonoBehaviour
     {
         speedBoostActivated = true;
         navMeshAgent.speed = speedvalueHolder * 2;
-        
-        GameObject shoot = Instantiate(SpeedBoostEffect, transform.position, Quaternion.identity);
+
+        GameObject shoot = objectPoolManager.GetSpeedBoostEffect();
+        shoot.transform.position = transform.position;
+        shoot.SetActive(true);
         SpeedBoostObject = shoot;
-        shoot.transform.SetParent(parent.transform);
-        Destroy(shoot, time + 0.05f);
-        
+
         yield return new WaitForSeconds(time);
+
         speedBoostActivated = false;
         navMeshAgent.speed = speedvalueHolder;
+
+        SpeedBoostObject.SetActive(false);
     }
 
 
@@ -257,23 +282,6 @@ public class PlayerMovement : MonoBehaviour
     public float GetAngle()
     {
         return angleHolder;
-    }
-
-    private void IsVisibleOnScreen(GameObject targetIndicator)
-    {
-        Vector3 targetScreenPoint = mainCamera.WorldToScreenPoint(targetIndicator.GetComponent<Renderer>().bounds.center);
-
-        if ((targetScreenPoint.x < 0) || (targetScreenPoint.x > Screen.width) ||
-                (targetScreenPoint.y < 0) || (targetScreenPoint.y > Screen.height))
-        {
-            enemyIndicator.SetActive(true);
-            CalculateAngle(energy);
-        }
-        else
-        {
-            enemyIndicator.SetActive(false);
-        }
-
     }
 
     private void SmoothlyTurnBacktoDefaultRotation(Quaternion rot)
@@ -328,8 +336,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void DroneColorControl()
     {
-        int currentEnergy = playerHealth.gameSession.GetEnergyAmount(); // This value changes between 0-6
-
         switch (currentEnergy)
         {
             case 0:
